@@ -1,0 +1,40 @@
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 0px 50px;
+  background-color: rgba(20, 51, 20, 1);
+  z-index: 3;
+}
+
+.header img {
+  height: 100px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.header a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+}
+.header a:hover {
+  text-decoration: underline;
+}
+.header a.active {
+  text-decoration: underline;
+}
+
+.header button {
+  border: 0;
+  border-radius: var(--primary-radius);
+  background-color: #eaeaea;
+  color: #111;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  padding: 8px 12px;
+}
+
+.header button:hover {
+  background-color: #e0e0e0;
+}
