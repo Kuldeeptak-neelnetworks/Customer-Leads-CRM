@@ -5,3 +5,26 @@
   --primary-radius: 6px;
   font-family: "Roboto", sans-serif;
 }
+
+.main-wrapper {
+  padding-top: 100px;
+  padding-left: 200px;
+}
+
+.no-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--primary-green-color);
+  color: #fff;
+}
+.no-page-wrapper h2 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+.no-page-wrapper a {
+  color: #fff;
+  font-size: 1.25rem;
+}

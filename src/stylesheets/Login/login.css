@@ -1,4 +1,4 @@
-.login-signup-wrapper {
+.login-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6,7 +6,7 @@
   background-color: var(--primary-green-color);
 }
 
-.login-signup-wrapper form {
+.login-wrapper form {
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -18,11 +18,11 @@
   padding: 30px;
 }
 
-.login-signup-wrapper form h2 {
+.login-wrapper form h2 {
   margin: 0 auto;
 }
 
-.login-signup-wrapper form .group {
+.login-wrapper form .group {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -39,7 +39,7 @@
   outline: 1px solid var(--primary-green-color);
 }
 
-.login-signup-wrapper form button {
+.login-wrapper form button {
   padding: 8px 16px;
   outline: none;
   border: 0;
@@ -49,11 +49,15 @@
   transition: all 0.3s ease;
 }
 
-.login-signup-wrapper form button:hover {
+.login-wrapper form button:hover {
   box-shadow: rgba(191, 205, 191, 0.2) 0px 8px 24px;
 }
 
-.login-signup-wrapper form .note a {
+.login-wrapper form button:disabled {
+  cursor: not-allowed;
+}
+
+.login-wrapper form .note a {
   color: var(--primary-green-color);
   transition: all 0.3s ease;
   text-decoration: none;

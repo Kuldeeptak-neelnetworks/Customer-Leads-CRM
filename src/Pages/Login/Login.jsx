@@ -1,22 +1,93 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+
+import ReactHotToast from "../../utils/ReactHotToast/ReactHotToast";
+import { apiUrl, headerOptions } from "../../utils/Constants/constants";
 
 const Login = () => {
+  const navigate = useNavigate();
+
+  // if token is available then redirecting user to dashboard page
+  if (localStorage.getItem("token")) navigate("/dashboard");
+
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setUser((prev) => ({ ...prev, [id]: value }));
+  };
+
+  const handleLogin = async () => {
+    try {
+      setIsDisabled(true);
+      const url = `${apiUrl}/login`;
+      const result = await axios.post(url, user, headerOptions);
+
+      console.log("result: ", result);
+      if (result.status === 200) {
+        localStorage.setItem(
+          "token",
+          JSON.stringify(result.data.user_data.token)
+        );
+        localStorage.setItem(
+          "user",
+          JSON.stringify(result.data.user_data.user)
+        );
+        ReactHotToast(result.data.message, "success");
+        navigate("/dashboard");
+      }
+    } catch (e) {
+      ReactHotToast(e.response.data.message, "error");
+    } finally {
+      setIsDisabled(false);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (user.email && user.password) {
+      handleLogin();
+    } else {
+      ReactHotToast("Enter Email & Password!", "error");
+    }
+  };
+
   return (
-    <div className="login-signup-wrapper">
-      <form className="w-25">
+    <div className="login-wrapper">
+      <form className="w-25" onSubmit={handleSubmit}>
         <h2>Login</h2>
         <div className="group">
-          <label>Email</label>
-          <input />
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            value={user.email}
+            onChange={(e) => handleChange(e)}
+            required
+          />
         </div>
         <div className="group">
           <label>Password</label>
-          <input />
+          <input
+            type="password"
+            id="password"
+            value={user.password}
+            onChange={(e) => handleChange(e)}
+            required
+            autoComplete="off"
+          />
         </div>
         <p className="note text-end w-100">
-          Don't have an account? <Link to="/signup">Register Now!</Link>
+          <Link to="/forgot-password">Forgot Password?</Link>
         </p>
-        <button>Login</button>
+        <button type="submit" disabled={isDisabled}>
+          Login
+        </button>
       </form>
     </div>
   );
