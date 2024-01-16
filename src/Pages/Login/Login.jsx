@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
 import ReactHotToast from "../../utils/ReactHotToast/ReactHotToast";
-import { apiUrl, headerOptions } from "../../utils/Constants/constants";
+import { apiUrl } from "../../utils/Constants/constants";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -12,8 +12,8 @@ const Login = () => {
   if (localStorage.getItem("token")) navigate("/dashboard");
 
   const [user, setUser] = useState({
-    email: "",
-    password: "",
+    email: "hem@gmail.com",
+    password: "hemant",
   });
   const [isDisabled, setIsDisabled] = useState(false);
 
@@ -26,7 +26,7 @@ const Login = () => {
     try {
       setIsDisabled(true);
       const url = `${apiUrl}/login`;
-      const result = await axios.post(url, user, headerOptions);
+      const result = await axios.post(url, user);
 
       console.log("result: ", result);
       if (result.status === 200) {

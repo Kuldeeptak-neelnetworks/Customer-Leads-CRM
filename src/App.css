@@ -7,8 +7,9 @@
 }
 
 .main-wrapper {
-  padding-top: 100px;
-  padding-left: 200px;
+  margin-top: 100px;
+  margin-left: 150px;
+  padding: 50px;
 }
 
 .no-page-wrapper {
@@ -27,4 +28,78 @@
 .no-page-wrapper a {
   color: #fff;
   font-size: 1.25rem;
+}
+
+/* ------------------------------------------------ */
+.edit-btn,
+.delete-btn,
+.add-new-btn {
+  border: 0;
+  border-radius: var(--primary-radius);
+  color: #fff;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  padding: 8px 12px;
+}
+
+.edit-btn {
+  background-color: var(--primary-green-color);
+}
+.delete-btn {
+  background-color: tomato;
+}
+.add-new-btn {
+  color: #111;
+}
+.add-new-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.react-table .react-table_tbody {
+  vertical-align: middle;
+}
+
+/* ------------------------------------- */
+
+form .group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.group input,
+.group select {
+  border: 1px solid #ccc;
+  border-radius: var(--primary-radius);
+  padding: 6px 8px;
+  text-overflow: ellipsis;
+}
+
+.group input:focus,
+.group select:focus {
+  outline: 1px solid var(--primary-green-color);
+}
+
+form button {
+  padding: 8px 16px;
+  outline: none;
+  border: 0;
+  background-color: var(--primary-green-color);
+  color: white;
+  border-radius: var(--primary-radius);
+  transition: all 0.3s ease;
+}
+
+form button:hover {
+  box-shadow: rgba(191, 205, 191, 0.2) 0px 8px 24px;
+}
+
+form button:disabled {
+  cursor: not-allowed;
+}
+
+form .note a {
+  color: var(--primary-green-color);
+  transition: all 0.3s ease;
+  text-decoration: none;
 }
