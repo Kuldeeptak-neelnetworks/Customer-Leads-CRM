@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { SpinningLoader } from "../../Templates/SpinningLoader/SpinningLoader";
 
 import logo from "../../assets/logo.svg";
 import ReactHotToast from "../../utils/ReactHotToast/ReactHotToast";
@@ -88,7 +89,7 @@ const Login = () => {
           <Link to="/forgot-password">Forgot Password?</Link>
         </p>
         <button type="submit" disabled={isDisabled}>
-          Login
+          {isDisabled ? <SpinningLoader /> : "Login"}
         </button>
       </form>
     </div>
