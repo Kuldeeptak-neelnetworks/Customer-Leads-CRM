@@ -1,9 +1,16 @@
 .login-wrapper {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: start;
   align-items: center;
   min-height: 100vh;
   background-color: var(--primary-green-color);
+  gap: 15px;
+  padding-top: 10vh;
+}
+
+.login-wrapper img {
+  height: 150px;
 }
 
 .login-wrapper form {

@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
+import logo from "../../assets/logo.svg";
 import ReactHotToast from "../../utils/ReactHotToast/ReactHotToast";
 import { apiUrl } from "../../utils/Constants/constants";
 
@@ -59,6 +60,7 @@ const Login = () => {
 
   return (
     <div className="login-wrapper">
+      <img src={logo} alt="logo" />
       <form className="w-25" onSubmit={handleSubmit}>
         <h2>Login</h2>
         <div className="group">
