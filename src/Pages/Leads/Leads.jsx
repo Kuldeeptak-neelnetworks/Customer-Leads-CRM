@@ -66,15 +66,18 @@ const Leads = () => {
     usePagination
   );
 
+  const userRole = +JSON.parse(localStorage.getItem("user")).userRoles;
   return (
     <div className="main-wrapper">
       <h2>Leads</h2>
-      <div className="d-flex justify-content-end align-items-center">
-        <AddNewLead
-          setIsUpdated={setIsUpdated}
-          customers={initialState.customers}
-        />
-      </div>
+      {userRole !== 1 && (
+        <div className="d-flex justify-content-end align-items-center">
+          <AddNewLead
+            setIsUpdated={setIsUpdated}
+            customers={initialState.customers}
+          />
+        </div>
+      )}
       {initialState.isLoading ? (
         <ReactSkeletonTable columnHeaders={columnHeaders} />
       ) : initialState.leads.length > 0 ? (
