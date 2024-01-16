@@ -44,9 +44,22 @@ export const MainContext = ({ children }) => {
     });
   };
 
+  // --------------------- FOR ALL CUSTOMERS ---------------------------------------------------
+  // getting all users API
+  const getAllCustomers = () => {
+    const url = `${apiUrl}/customers`;
+    getData(url, (result) => {
+      console.log("all customers: ", result);
+      setInitialState((prev) => ({
+        ...prev,
+        customers: result?.data?.users_data ?? [],
+      }));
+    });
+  };
+
   return (
     <ContextMain.Provider
-      value={{ initialState, setInitialState, getAllUsers }}
+      value={{ initialState, setInitialState, getAllUsers, getAllCustomers }}
     >
       {children}
     </ContextMain.Provider>

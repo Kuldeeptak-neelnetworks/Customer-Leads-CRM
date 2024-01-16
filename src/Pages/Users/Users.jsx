@@ -3,6 +3,7 @@ import { ContextMain } from "../../Context/MainContext";
 
 import ReactSkeletonTable from "../../Templates/ReactSkeletonTable/ReactSkeletonTable";
 import ReactTable from "../../Templates/ReactTable/ReactTable";
+import { AddNewUser } from "./AddNewUser";
 
 import {
   useTable,
@@ -10,7 +11,6 @@ import {
   useSortBy,
   usePagination,
 } from "react-table";
-import { AddNewUser } from "./AddNewUser";
 
 const Users = () => {
   const { initialState, getAllUsers } = useContext(ContextMain);
