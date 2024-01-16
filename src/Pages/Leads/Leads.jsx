@@ -19,7 +19,6 @@ const Leads = () => {
   const columnHeaders = ["Sr no.", "Name", "Email ID", "Actions"];
 
   useEffect(() => {
-    // getAllLeads();
     getAllCustomers();
   }, [isUpdated]);
 
@@ -36,11 +35,10 @@ const Leads = () => {
     {
       Header: "Email ID",
       accessor: "email",
-      //   Cell: ({ row }) => {
-      //     return (
-      //       row.original?.client_email?.split(",")[0] ?? row.original.client_email
-      //     );
-      //   },
+    },
+    {
+      Header: "Company",
+      accessor: "company_name",
     },
     {
       Header: "Actions",

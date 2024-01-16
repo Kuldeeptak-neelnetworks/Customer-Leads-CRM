@@ -4,6 +4,7 @@ import Modal from "react-bootstrap/Modal";
 
 import ReactHotToast from "../../utils/ReactHotToast/ReactHotToast";
 import { apiUrl, headerOptions } from "../../utils/Constants/constants";
+import { SpinningLoader } from "../../Templates/SpinningLoader/SpinningLoader";
 
 const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
   const [isDisabled, setIsDisabled] = useState(false);
@@ -152,8 +153,7 @@ const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
           </div>
 
           <button type="submit" className="custom-btn" disabled={isDisabled}>
-            {/* {isLoading ? <SpinningLoader /> : "Add Project"} */}
-            Add
+            {isDisabled ? <SpinningLoader /> : "Add"}
           </button>
         </form>
       </Modal.Body>
