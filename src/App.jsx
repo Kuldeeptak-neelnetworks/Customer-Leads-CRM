@@ -7,10 +7,12 @@ import ForgotPassword from "./Pages/ForgotPassword/ForgotPassword";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Leads from "./Pages/Leads/Leads";
 import Customers from "./Pages/Customers/Customers";
+import Users from "./Pages/Users/Users";
 import Profile from "./Pages/Profile/Profile";
 import NoPage from "./Pages/NoPage/NoPage";
 
 // stylesheets
+import "react-loading-skeleton/dist/skeleton.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./stylesheets/Login/login.css";
 import "./stylesheets/Header/header.css";
@@ -65,6 +67,15 @@ function App() {
               <>
                 <HeaderAndSiderbar />
                 <Customers />
+              </>
+            }
+          />
+          <Route
+            path="/users"
+            element={
+              <>
+                <HeaderAndSiderbar />
+                <Users />
               </>
             }
           />
