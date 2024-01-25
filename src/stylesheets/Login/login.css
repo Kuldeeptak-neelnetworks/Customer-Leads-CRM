@@ -33,9 +33,10 @@
 .bg-wrapper {
   height: 100vh;
   width: 100%;
-  background-image: url("../../assets/login-1.jpg");
+  background-image: url("../../assets/login-4.jpg");
   background-position: center;
   background-repeat: no-repeat;
   overflow: hidden;
   background-size: cover;
+  background-attachment: fixed;
 }
