@@ -1,9 +1,32 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@font-face {
+  font-family: "anglecia_pro_dspitalic";
+  src: url("./assets/fonts/angleciaprodisplay-italic-webfont.woff2")
+      format("woff2"),
+    url("./assets/fonts/angleciaprodisplay-italic-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "anglecia_pro_dspregular";
+  src: url("./assets/fonts/angleciaprodisplay-regular-webfont.woff2")
+      format("woff2"),
+    url("./assets/fonts/angleciaprodisplay-regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 
 :root {
-  --primary-green-color: #30672e;
+  --primary-green-color: #519538;
+  --primary-black-color: #07080a;
   --primary-radius: 6px;
-  font-family: "Roboto", sans-serif;
+  --jost-font-family: "Jost", sans-serif;
+  --roboto-font-family: "Roboto", sans-serif;
+  --anglecia-italic-font-family: "anglecia_pro_dspitalic";
+  --anglecia-regular-font-family: "anglecia_pro_dspregular";
 }
 
 .main-wrapper {
