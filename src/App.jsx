@@ -17,6 +17,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./stylesheets/Login/login.css";
 import "./stylesheets/Header/header.css";
 import "./stylesheets/Sidebar/sidebar.css";
+import "./stylesheets/custom-classes.css";
+import "./stylesheets/common.css";
 import "./App.css";
 
 // templates

@@ -31,8 +31,9 @@
 
 .main-wrapper {
   margin-top: 100px;
-  margin-left: 150px;
-  padding: 50px;
+  margin-left: 250px;
+  padding: 50px 20px;
+  min-height: calc(100vh - 100px);
 }
 
 .no-page-wrapper {

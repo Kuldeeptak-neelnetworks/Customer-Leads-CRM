@@ -1,21 +1,17 @@
-import { NavLink, useNavigate } from "react-router-dom";
-import logo from "../../assets/logo.svg";
+import { NotificationIconSVG } from "../../utils/SVGs/SVGs";
+import HeaderPopover from "./HeaderPopover";
 
 const Header = () => {
-  const navigate = useNavigate();
   return (
-    <div className="header w-100 d-flex justify-content-between align-items-center">
-      <img onClick={() => navigate("/dashboard")} src={logo} alt="logo" />
-      <div className="d-flex gap-4 align-items-center">
-        <NavLink to="/profile">Profile</NavLink>
-        <button
-          onClick={() => {
-            localStorage.clear();
-            navigate("/");
-          }}
-        >
-          Logout
-        </button>
+    <div className="header w-100 d-flex justify-content-end align-items-center">
+      <div className="d-flex align-items-center gap-3">
+        <p className="m-0 username">Deven</p>
+        <div className="header-icon">
+          <HeaderPopover />
+        </div>
+        <div className="header-icon notifications active">
+          <NotificationIconSVG />
+        </div>
       </div>
     </div>
   );
