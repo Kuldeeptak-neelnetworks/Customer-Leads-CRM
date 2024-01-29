@@ -33,7 +33,7 @@
 .bg-wrapper {
   height: 100vh;
   width: 100%;
-  background-image: url("../../assets/login.jpg");
+  background-image: url("../../assets/login-bg.jpg");
   background-position: center;
   background-repeat: no-repeat;
   overflow: hidden;
@@ -48,9 +48,9 @@
 .content-parent {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
-  gap: 25px;
+  height: 80%;
 }
 
 .login-heading {
@@ -118,4 +118,32 @@
   padding: 12px;
   color: #00523f;
   background-color: var(--primary-green-color);
+}
+
+.password-eye-icon {
+  height: 22px;
+  width: 22px;
+  right: 10px;
+  top: 10px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.page-title {
+  font-family: var(--jost-font-family);
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+}
+
+.page-text {
+  font-family: var(--jost-font-family);
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.25;
+  word-spacing: 0.5px;
+  text-align: center;
+  color: #fff;
 }
