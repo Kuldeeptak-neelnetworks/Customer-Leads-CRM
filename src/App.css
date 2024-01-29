@@ -113,10 +113,6 @@ form button {
   transition: all 0.3s ease;
 }
 
-form button:hover {
-  box-shadow: rgba(191, 205, 191, 0.2) 0px 8px 24px;
-}
-
 form button:disabled {
   cursor: not-allowed;
 }

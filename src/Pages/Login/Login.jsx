@@ -3,9 +3,11 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { SpinningLoader } from "../../Templates/SpinningLoader/SpinningLoader";
 
-import logo from "../../assets/logo.svg";
 import ReactHotToast from "../../utils/ReactHotToast/ReactHotToast";
 import { apiUrl } from "../../utils/Constants/constants";
+import { EyeIconSVG, EyeIconDisabledSVG } from "../../utils/SVGs/SVGs";
+import logo from "../../assets/logo.png";
+import avatar from "../../assets/avatar.png";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -18,6 +20,9 @@ const Login = () => {
     password: "hemant",
   });
   const [isDisabled, setIsDisabled] = useState(false);
+
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePassword = () => setShowPassword((prev) => !prev);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -60,38 +65,65 @@ const Login = () => {
   };
 
   return (
-    <div className="login-wrapper">
-      <img src={logo} alt="logo" />
-      <form className="w-25" onSubmit={handleSubmit}>
-        <h2>Login</h2>
-        <div className="group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            value={user.email}
-            onChange={(e) => handleChange(e)}
-            required
-          />
+    <div className="bg-wrapper">
+      <div className="content-parent">
+        <div className="text-center">
+          <img src={avatar} alt="avatar" />
+          <h2 className="login-heading">Welcome</h2>
         </div>
-        <div className="group">
-          <label>Password</label>
-          <input
-            type="password"
-            id="password"
-            value={user.password}
-            onChange={(e) => handleChange(e)}
-            required
-            autoComplete="off"
-          />
-        </div>
-        <p className="note text-end w-100">
-          <Link to="/forgot-password">Forgot Password?</Link>
-        </p>
-        <button type="submit" disabled={isDisabled}>
-          {isDisabled ? <SpinningLoader /> : "Login"}
-        </button>
-      </form>
+        <form className="login-form" onSubmit={handleSubmit}>
+          <div className="group mb-4">
+            <label htmlFor="email">Email Id</label>
+            <input
+              type="email"
+              id="email"
+              value={user.email}
+              onChange={(e) => handleChange(e)}
+              required
+            />
+          </div>
+          <div className="group mb-2">
+            <label htmlFor="password">Password</label>
+            <div className="w-100 position-relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                value={user.password}
+                onChange={(e) => handleChange(e)}
+                required
+                autoComplete="off"
+                className="position-relative w-100"
+                style={{ paddingRight: "40px" }}
+              />
+              {showPassword ? (
+                <div onClick={togglePassword}>
+                  <EyeIconSVG
+                    cssClass={"position-absolute password-eye-icon"}
+                  />
+                </div>
+              ) : (
+                <div onClick={togglePassword}>
+                  <EyeIconDisabledSVG
+                    cssClass={"position-absolute password-eye-icon"}
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="text-end mb-2">
+            <Link to="/forgot-password" className="link">
+              Forgot Password?
+            </Link>
+          </div>
+          <button
+            className="w-100 login-btn d-flex justify-content-center align-items-center"
+            disabled={isDisabled}
+          >
+            {isDisabled ? <SpinningLoader /> : "LOGIN"}
+          </button>
+        </form>
+        <img className="pt-5 w-100" src={logo} alt="logo" />
+      </div>
     </div>
   );
 };

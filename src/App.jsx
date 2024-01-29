@@ -3,8 +3,6 @@ import { Toaster } from "react-hot-toast";
 
 // routes
 import Login from "./Pages/Login/Login";
-import NewLogin from "./Pages/Login/NewLogin";
-
 import ForgotPassword from "./Pages/ForgotPassword/ForgotPassword";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Leads from "./Pages/Leads/Leads";
@@ -42,7 +40,6 @@ function App() {
     <div>
       <Routes>
         <Route index path="/" element={<Login />} />
-        <Route index path="/new-login" element={<NewLogin />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="*" element={<NoPage />} />
         <Route element={<TokenAuth />}>
