@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { SpinningLoader } from "../../Templates/SpinningLoader/SpinningLoader";
@@ -12,8 +12,10 @@ import avatar from "../../assets/avatar.png";
 const Login = () => {
   const navigate = useNavigate();
 
-  // if token is available then redirecting user to dashboard page
-  if (localStorage.getItem("token")) navigate("/dashboard");
+  useEffect(() => {
+    // if token is available then redirecting user to dashboard page
+    if (localStorage.getItem("token")) navigate("/dashboard");
+  }, []);
 
   const [user, setUser] = useState({
     email: "hem@gmail.com",

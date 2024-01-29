@@ -2,39 +2,54 @@
   position: fixed;
   top: 0;
   width: 100%;
+  height: 100px;
   padding: 0px 50px;
-  background-color: rgba(20, 51, 20, 1);
+  background-color: #07080a;
   z-index: 3;
+  box-shadow: 4px 4px 4px 0px #0000000d;
 }
 
-.header img {
-  height: 100px;
-  object-fit: cover;
+.header-popover .popover .popover-arrow {
+  display: none;
+}
+
+.username {
+  color: #fff;
+  font-family: var(--jost-font-family);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.header-link {
+  color: #000;
+  font-family: var(--jost-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+}
+#popover-contained {
+  width: 100px;
+}
+
+.header-icon {
+  position: relative;
+  height: 26px;
+  width: 26px;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
 }
 
-.header a {
-  text-decoration: none;
-  color: #fff;
-  font-weight: 500;
-}
-.header a:hover {
-  text-decoration: underline;
-}
-.header a.active {
-  text-decoration: underline;
-}
-
-.header button {
-  border: 0;
-  border-radius: var(--primary-radius);
-  background-color: #eaeaea;
-  color: #111;
-  transition: all 0.3s ease;
-  font-weight: 500;
-  padding: 8px 12px;
-}
-
-.header button:hover {
-  background-color: #e0e0e0;
+.notifications.active::before {
+  position: absolute;
+  content: "";
+  height: 11px;
+  width: 11px;
+  background-color: #ff3528;
+  border-radius: 50%;
+  top: -5px;
+  right: -5px;
 }
