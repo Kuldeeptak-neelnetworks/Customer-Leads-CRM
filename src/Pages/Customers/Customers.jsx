@@ -11,6 +11,7 @@ import {
   useSortBy,
   usePagination,
 } from "react-table";
+import PageHeader from "../../Templates/PageHeader/PageHeader";
 
 const Customers = () => {
   const { initialState, getAllCustomers } = useContext(ContextMain);
@@ -79,12 +80,9 @@ const Customers = () => {
 
   return (
     <div className="main-wrapper">
-      <h2>Customers</h2>
-      {userRole !== 1 && (
-        <div className="d-flex justify-content-end align-items-center">
-          <AddNewCustomer setIsUpdated={setIsUpdated} />
-        </div>
-      )}
+      <PageHeader heading={"Customers"}>
+        {userRole !== 1 && <AddNewCustomer setIsUpdated={setIsUpdated} />}
+      </PageHeader>
 
       {initialState.isLoading ? (
         <ReactSkeletonTable columnHeaders={columnHeaders} />

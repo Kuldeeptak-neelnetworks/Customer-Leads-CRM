@@ -5,6 +5,7 @@ import Modal from "react-bootstrap/Modal";
 import ReactHotToast from "../../utils/ReactHotToast/ReactHotToast";
 import { apiUrl, headerOptions } from "../../utils/Constants/constants";
 import { SpinningLoader } from "../../Templates/SpinningLoader/SpinningLoader";
+import { PlusIconSVG } from "../../utils/SVGs/SVGs";
 
 const MyVerticallyCenteredModal = ({
   show,
@@ -139,7 +140,12 @@ export const AddNewLead = ({ setIsUpdated, customers }) => {
           setModalShow(true);
         }}
       >
-        <button className="add-new-btn">Add New Lead</button>
+        <button className="cta-btn w-50">
+          Add New Lead
+          <span>
+            <PlusIconSVG />
+          </span>
+        </button>
       </div>
 
       <MyVerticallyCenteredModal

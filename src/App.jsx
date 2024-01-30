@@ -22,8 +22,8 @@ import "./stylesheets/common.css";
 import "./App.css";
 
 // templates
-import Header from "./Templates/Header/Header";
-import Sidebar from "./Templates/Sidebar/Sidebar";
+import Header from "./Components/Header/Header";
+import Sidebar from "./Components/Sidebar/Sidebar";
 
 // private routes template
 import TokenAuth from "./utils/PrivateRoutes/TokenAuth";

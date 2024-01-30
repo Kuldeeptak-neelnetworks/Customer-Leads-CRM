@@ -11,12 +11,24 @@ import {
   useSortBy,
   usePagination,
 } from "react-table";
+import PageHeader from "../../Templates/PageHeader/PageHeader";
+import { DeleteIconSVG, EditIconSVG } from "../../utils/SVGs/SVGs";
+import ReactTableFooter from "../../Templates/ReactTableFooter/ReactTableFooter";
 
 const Leads = () => {
   const { initialState, getAllCustomers } = useContext(ContextMain);
   const [isUpdated, setIsUpdated] = useState(false);
 
   const columnHeaders = ["Sr no.", "Name", "Email ID", "Actions"];
+
+  // constructing headers for CSV Link
+  const headers = {
+    headings: [
+      { label: "Name", key: "name" },
+      { label: "Email Id", key: "email" },
+    ],
+    fileName: "Leads",
+  };
 
   useEffect(() => {
     getAllCustomers();
@@ -43,9 +55,10 @@ const Leads = () => {
     {
       Header: "Actions",
       Cell: ({ row }) => (
-        <div className="table-actions-wrapper d-flex justify-content-center align-items-center gap-4">
-          <button className="edit-btn">Edit</button>
-          <button className="delete-btn">Delete</button>
+        <div className="table-actions-wrapper d-flex justify-content-center align-items-center gap-2">
+          <EditIconSVG cssClass={"cursor-pointer"} />
+          <span style={{ color: "#00263d38" }}>|</span>
+          <DeleteIconSVG cssClass={"cursor-pointer"} />
         </div>
       ),
     },
@@ -67,19 +80,26 @@ const Leads = () => {
   const userRole = +JSON.parse(localStorage.getItem("user")).userRoles;
   return (
     <div className="main-wrapper">
-      <h2>Leads</h2>
-      {userRole !== 1 && (
-        <div className="d-flex justify-content-end align-items-center">
+      <PageHeader heading={"Leads"}>
+        {userRole !== 1 && (
           <AddNewLead
             setIsUpdated={setIsUpdated}
             customers={initialState.customers}
           />
-        </div>
-      )}
+        )}
+      </PageHeader>
+
       {initialState.isLoading ? (
         <ReactSkeletonTable columnHeaders={columnHeaders} />
       ) : initialState.leads.length > 0 ? (
-        <ReactTable tableInstance={tableInstance} />
+        <>
+          <ReactTable tableInstance={tableInstance} />
+          <ReactTableFooter
+            data={initialState.leads}
+            tableInstance={tableInstance}
+            headers={headers}
+          />
+        </>
       ) : (
         <p className="m-0">No Leads Found!</p>
       )}
