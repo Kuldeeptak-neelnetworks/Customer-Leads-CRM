@@ -22,6 +22,8 @@
 :root {
   --primary-green-color: #519538;
   --primary-black-color: #07080a;
+  --blue-font-color: #00263d;
+  --primary-border-color: #00263d38;
   --primary-radius: 6px;
   --jost-font-family: "Jost", sans-serif;
   --roboto-font-family: "Roboto", sans-serif;
@@ -29,11 +31,18 @@
   --anglecia-regular-font-family: "anglecia_pro_dspregular";
 }
 
+.sidebar ~ .main-wrapper {
+  margin-left: 250px;
+}
+.sidebar.close ~ .main-wrapper {
+  margin-left: 150px;
+}
+
 .main-wrapper {
   margin-top: 100px;
-  margin-left: 250px;
-  padding: 50px 20px;
+  padding: 50px 50px 50px 20px;
   min-height: calc(100vh - 100px);
+  transition: 0.3s ease;
 }
 
 .no-page-wrapper {

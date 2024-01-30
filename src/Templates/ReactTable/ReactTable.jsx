@@ -1,3 +1,5 @@
+import { DoubleArrowsSVG, DownArrow, UpArrow } from "../../utils/SVGs/SVGs";
+
 const ReactTable = ({ tableInstance }) => {
   const { getTableProps, getTableBodyProps, headerGroups, page, prepareRow } =
     tableInstance;
@@ -15,6 +17,25 @@ const ReactTable = ({ tableInstance }) => {
                 >
                   <span>
                     <span>{column.render("Header")} </span>
+                    <span>
+                      {column.Header === "Actions" ? (
+                        ""
+                      ) : column.isSorted ? (
+                        column.isSortedDesc ? (
+                          <span className="sorting_arrow-size">
+                            <DownArrow />
+                          </span>
+                        ) : (
+                          <span className="sorting_arrow-size">
+                            <UpArrow />
+                          </span>
+                        )
+                      ) : (
+                        <span className="sorting_arrow-size">
+                          <DoubleArrowsSVG />
+                        </span>
+                      )}
+                    </span>
                   </span>
                 </th>
               );

@@ -17,10 +17,7 @@ const HeaderPopover = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("userId");
-    localStorage.removeItem("userRole");
-    localStorage.removeItem("username");
+    localStorage.clear();
     navigate("/");
   };
   return (
