@@ -52,7 +52,7 @@ const ForgotPassword = () => {
             className="w-100 login-btn d-flex justify-content-center align-items-center"
             disabled={isDisabled}
           >
-            {isDisabled ? <SpinningLoader /> : "LOGIN"}
+            {isDisabled ? <SpinningLoader /> : "SUBMIT"}
           </button>
         </form>
         <img className="pt-5 w-100" src={logo} alt="logo" />
