@@ -13,6 +13,14 @@
   display: none;
 }
 
+.header-popover h3.popover-header:nth-of-type(2) {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: calc(0.5rem - 1px);
+  border-bottom-right-radius: calc(0.5rem - 1px);
+  border: 0;
+}
+
 .username {
   color: #fff;
   font-family: var(--jost-font-family);
