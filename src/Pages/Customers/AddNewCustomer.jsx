@@ -23,12 +23,21 @@ const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
     setCustomer((prev) => ({ ...prev, [id]: value }));
   };
 
-  const addNewCustomer = async () => {
+  const addNewCustomer = async (event) => {
     try {
       setIsDisabled(true);
+
+      const formData = new FormData(event.currentTarget);
+      formData.append("contact_name", customer.contact_name);
+      formData.append("company_name", customer.company_name);
+      formData.append("email_address", customer.email_address);
+      formData.append("mobile_no", customer.mobile_no);
+      formData.append("address", customer.address);
+      formData.append("phone_no", customer.phone_no);
+
       const url = `${apiUrl}/customers`;
-      const result = await axios.post(url, customer, {
-        headers: headerOptions(),
+      const result = await axios.post(url, formData, {
+        headers: headerOptions(true),
       });
 
       console.log("result add new customer: ", result);
@@ -46,7 +55,10 @@ const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
         });
       }
     } catch (e) {
-      ReactHotToast(e.response.data.message, "error");
+      // ReactHotToast(e.response.data.message, "error");
+      Object.values(e.response.data.error).forEach((error) =>
+        ReactHotToast(error, "error")
+      );
     } finally {
       setIsDisabled(false);
     }
@@ -54,19 +66,42 @@ const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
 
   const handleAddNewCustomer = (e) => {
     e.preventDefault();
+
+    const {
+      contact_name,
+      company_name,
+      email_address,
+      mobile_no,
+      address,
+      phone_no,
+    } = customer;
+
     const bool = [
-      customer.contact_name,
-      customer.company_name,
-      customer.email_address,
-      customer.mobile_no,
-      customer.address,
-      customer.phone_no,
+      contact_name,
+      company_name,
+      email_address,
+      mobile_no,
+      address,
+      phone_no,
     ].every(Boolean);
 
     if (bool) {
-      addNewCustomer();
+      addNewCustomer(e);
     } else {
-      ReactHotToast("Fill all the Details!", "error");
+      const conditions = {
+        [!contact_name]: "Please input name!",
+        [!company_name]: "Please input company!",
+        [!email_address]: "Please input email!",
+        [!mobile_no]: "Please input contact!",
+        [!address]: "Please input address!",
+        [!phone_no]: "Please input landline",
+      };
+
+      const errorMessage = conditions[true];
+
+      if (errorMessage) {
+        ReactHotToast(errorMessage, "error");
+      }
     }
   };
 

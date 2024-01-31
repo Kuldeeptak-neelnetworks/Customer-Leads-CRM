@@ -16,8 +16,8 @@ const MyVerticallyCenteredModal = ({
   const [isDisabled, setIsDisabled] = useState(false);
   const [lead, setLead] = useState({
     customer: { label: "", value: "" },
-    phone_no: "",
-    address: "",
+    // phone_no: "",
+    // address: "",
   });
 
   const handleChange = (e) => {
@@ -25,31 +25,42 @@ const MyVerticallyCenteredModal = ({
     setLead((prev) => ({ ...prev, [id]: value }));
   };
 
-  const addNewLead = async () => {
+  const addNewLead = async (event) => {
     try {
       setIsDisabled(true);
+
+      const formData = new FormData(event.currentTarget);
+      formData.append("customer_id", lead.customer.value);
+
       const url = `${apiUrl}/leads`;
-      const result = await axios.post(
-        url,
-        { customer_id: lead.customer },
-        {
-          headers: headerOptions(),
-        }
-      );
+      // const result = await axios.post(
+      //   url,
+      //   { customer_id: lead.customer },
+      //   {
+      //     headers: headerOptions(true),
+      //   }
+      // );
+      const result = await axios.post(url, formData, {
+        headers: headerOptions(true),
+      });
 
       console.log("result add new lead: ", result);
+
       if (result.status === 201) {
         ReactHotToast(result.data.message, "success");
         onHide();
         setIsUpdated((prev) => !prev);
         setLead({
           customer: "",
-          phone_no: "",
-          address: "",
+          // phone_no: "",
+          // address: "",
         });
       }
     } catch (e) {
-      ReactHotToast(e.response.data.message, "error");
+      // ReactHotToast(e.response.data.message, "error");
+      Object.values(e.response.data.error).forEach((error) =>
+        ReactHotToast(error, "error")
+      );
     } finally {
       setIsDisabled(false);
     }
@@ -57,12 +68,12 @@ const MyVerticallyCenteredModal = ({
 
   const handleAddNewLead = (e) => {
     e.preventDefault();
-    const bool = [lead.customer, lead.address, lead.phone_no].every(Boolean);
+    // const bool = [lead.customer, lead.address, lead.phone_no].every(Boolean);
 
-    if (bool) {
-      addNewLead();
+    if (lead.customer.value) {
+      addNewLead(e);
     } else {
-      ReactHotToast("Fill all the Details!", "error");
+      ReactHotToast("Please select Customer!", "error");
     }
   };
 
@@ -92,14 +103,14 @@ const MyVerticallyCenteredModal = ({
               onChange={(e) => handleChange(e)}
             >
               <option>Select Customer</option>
-              {customers.map((customer) => (
+              {customers?.map((customer) => (
                 <option key={customer.id} value={customer.id}>
                   {customer.contact_name}
                 </option>
               ))}
             </select>
           </div>
-          <div className="group">
+          {/* <div className="group">
             <label htmlFor="phone_no">Landline</label>
             <input
               type="tel"
@@ -108,8 +119,8 @@ const MyVerticallyCenteredModal = ({
               onChange={(e) => handleChange(e)}
               required
             />
-          </div>
-          <div className="group">
+          </div> */}
+          {/* <div className="group">
             <label htmlFor="address">Address</label>
             <input
               type="text"
@@ -118,7 +129,7 @@ const MyVerticallyCenteredModal = ({
               onChange={(e) => handleChange(e)}
               required
             />
-          </div>
+          </div> */}
           <button type="submit" className="cta-btn" disabled={isDisabled}>
             {isDisabled ? <SpinningLoader /> : "Add New Lead"}
           </button>

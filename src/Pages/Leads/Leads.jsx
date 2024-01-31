@@ -16,10 +16,17 @@ import { DeleteIconSVG, EditIconSVG } from "../../utils/SVGs/SVGs";
 import ReactTableFooter from "../../Templates/ReactTableFooter/ReactTableFooter";
 
 const Leads = () => {
-  const { initialState, getAllLeads } = useContext(ContextMain);
+  const { initialState, getAllLeads, getAllCustomers, getMyLeads } =
+    useContext(ContextMain);
   const [isUpdated, setIsUpdated] = useState(false);
+  const [leads, setLeads] = useState({
+    confirmedLeads: [],
+    notConfirmedLeads: [],
+  });
+  const [toggle, setToggle] = useState(true);
 
   const columnHeaders = ["Sr no.", "Name", "Company", "Actions"];
+  const userRole = +JSON.parse(localStorage.getItem("user")).userRoles;
 
   // constructing headers for CSV Link
   const headers = {
@@ -31,8 +38,59 @@ const Leads = () => {
   };
 
   useEffect(() => {
-    getAllLeads();
+    if (userRole === 1) {
+      getAllLeads();
+    } else {
+      getMyLeads();
+    }
+    getAllCustomers();
   }, [isUpdated]);
+
+  // useEffect(() => {
+  //   let leadsConfirmed, leadsNotConfirmed;
+  //   if (userRole === 1) {
+  //     leadsConfirmed = initialState.leads.filter(
+  //       ({ status }) => status !== "not_sell"
+  //     );
+  //     leadsNotConfirmed = initialState.leads.filter(
+  //       ({ status }) => status === "not_sell"
+  //     );
+  //   } else {
+  //     leadsConfirmed = initialState.myLeads.filter(
+  //       ({ status }) => status !== "not_sell"
+  //     );
+  //     leadsNotConfirmed = initialState.myLeads.filter(
+  //       ({ status }) => status === "not_sell"
+  //     );
+  //   }
+
+  //   setLeads(() => ({
+  //     confirmedLeads: leadsConfirmed,
+  //     notConfirmedLeads: leadsNotConfirmed,
+  //   }));
+  // }, [initialState.leads, initialState.myLeads]);
+
+  useEffect(() => {
+    const isUserAdmin = userRole === 1;
+
+    const filterLeads = (leads, status) =>
+      leads.filter(({ status: leadStatus }) => leadStatus === status);
+
+    const leadsConfirmed = filterLeads(
+      isUserAdmin ? initialState.leads : initialState.myLeads,
+      "sell"
+    );
+
+    const leadsNotConfirmed = filterLeads(
+      isUserAdmin ? initialState.leads : initialState.myLeads,
+      "not_sell"
+    );
+
+    setLeads({
+      confirmedLeads: leadsConfirmed,
+      notConfirmedLeads: leadsNotConfirmed,
+    });
+  }, [userRole, initialState.leads, initialState.myLeads]);
 
   const tableColumns = [
     {
@@ -69,7 +127,10 @@ const Leads = () => {
   ];
 
   const columns = useMemo(() => tableColumns, []);
-  const data = useMemo(() => initialState.leads, [initialState.leads]);
+  const data = useMemo(
+    () => (toggle ? leads.confirmedLeads : leads.notConfirmedLeads),
+    [toggle, leads.confirmedLeads, leads.notConfirmedLeads]
+  );
 
   const tableInstance = useTable(
     {
@@ -80,8 +141,6 @@ const Leads = () => {
     useSortBy,
     usePagination
   );
-
-  const userRole = +JSON.parse(localStorage.getItem("user")).userRoles;
 
   return (
     <div className="main-wrapper">
@@ -94,13 +153,34 @@ const Leads = () => {
         )}
       </PageHeader>
 
+      <section className="mt-4 mb-3">
+        <div className="d-flex gap-4">
+          <button
+            onClick={() => setToggle(true)}
+            className={`leads-tab-link ${toggle && "active"}`}
+          >
+            Confirmed Leads
+          </button>
+          <button
+            onClick={() => setToggle(false)}
+            className={`leads-tab-link ${!toggle && "active"}`}
+          >
+            Not Confirmed Leads
+          </button>
+        </div>
+      </section>
+
       {initialState.isLoading ? (
         <ReactSkeletonTable columnHeaders={columnHeaders} />
-      ) : initialState.leads.length > 0 ? (
+      ) : (
+          toggle
+            ? leads?.confirmedLeads?.length > 0
+            : leads?.notConfirmedLeads.length > 0
+        ) ? (
         <>
           <ReactTable tableInstance={tableInstance} />
           <ReactTableFooter
-            data={initialState.leads}
+            data={toggle ? leads.confirmedLeads : leads.notConfirmedLeads}
             tableInstance={tableInstance}
             headers={headers}
           />

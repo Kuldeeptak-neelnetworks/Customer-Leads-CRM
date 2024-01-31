@@ -61,10 +61,12 @@ const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
           address: "",
           profilePic: "",
         });
-        // formData.reset();
       }
     } catch (e) {
-      ReactHotToast(e.response.data.message, "error");
+      // ReactHotToast(e.response.data.message, "error");
+      Object.values(e.response.data.error).forEach((error) =>
+        ReactHotToast(error, "error")
+      );
     } finally {
       setIsDisabled(false);
     }
@@ -72,19 +74,29 @@ const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
 
   const handleAddNewUser = (e) => {
     e.preventDefault();
-    const bool = [
-      user.name,
-      user.email,
-      user.password,
-      user.userRoles,
-      user.contact_no,
-      user.address,
-    ].every(Boolean);
+    const { name, email, password, userRoles, contact_no, address } = user;
+
+    const bool = [name, email, password, userRoles, contact_no, address].every(
+      Boolean
+    );
 
     if (bool) {
       addNewUser(e);
     } else {
-      ReactHotToast("Fill all the Details!", "error");
+      const conditions = {
+        [!name]: "Please input User Name!",
+        [!email]: "Please input User Email!",
+        [!password]: "Please input User Password!",
+        [!userRoles]: "Please select User Role!",
+        [!contact_no]: "Please add Contact Info!",
+        [!address]: "Please provide Address",
+      };
+
+      const errorMessage = conditions[true];
+
+      if (errorMessage) {
+        ReactHotToast(errorMessage, "error");
+      }
     }
   };
 

@@ -10,6 +10,7 @@ export const MainContext = ({ children }) => {
   const [initialState, setInitialState] = useState({
     users: [],
     leads: [],
+    myLeads: [],
     customers: [],
     isLoading: false,
   });
@@ -46,7 +47,7 @@ export const MainContext = ({ children }) => {
   };
 
   // --------------------- FOR ALL CUSTOMERS ---------------------------------------------------
-  // getting all users API
+  // getting all customers API
   const getAllCustomers = () => {
     const url = `${apiUrl}/customers`;
     getData(url, (result) => {
@@ -59,7 +60,7 @@ export const MainContext = ({ children }) => {
   };
 
   // --------------------- FOR ALL LEADS ---------------------------------------------------
-  // getting all users API
+  // getting all leads API
   const getAllLeads = () => {
     const url = `${apiUrl}/leads`;
     getData(url, (result) => {
@@ -67,6 +68,18 @@ export const MainContext = ({ children }) => {
       setInitialState((prev) => ({
         ...prev,
         leads: result?.data?.leads_list ?? [],
+      }));
+    });
+  };
+
+  // getting my leads API
+  const getMyLeads = () => {
+    const url = `${apiUrl}/my-leads`;
+    getData(url, (result) => {
+      console.log("my leads: ", result);
+      setInitialState((prev) => ({
+        ...prev,
+        myLeads: result?.data?.leads_list ?? [],
       }));
     });
   };
@@ -79,6 +92,7 @@ export const MainContext = ({ children }) => {
         getAllUsers,
         getAllCustomers,
         getAllLeads,
+        getMyLeads,
       }}
     >
       {children}

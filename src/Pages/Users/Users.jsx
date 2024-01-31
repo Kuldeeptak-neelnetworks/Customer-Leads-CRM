@@ -19,7 +19,14 @@ const Users = () => {
   const { initialState, getAllUsers } = useContext(ContextMain);
   const [isUpdated, setIsUpdated] = useState(false);
 
-  const columnHeaders = ["Sr no.", "Name", "Email ID", "Actions"];
+  const columnHeaders = [
+    "Sr no.",
+    "Profile",
+    "Name",
+    "Email ID",
+    "Role",
+    "Actions",
+  ];
 
   // constructing headers for CSV Link
   const headers = {
