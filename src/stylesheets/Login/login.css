@@ -129,6 +129,10 @@
   color: #fff;
   cursor: pointer;
 }
+.password-eye-icon.not-login-form {
+  color: var(--primary-black-color);
+  top: 5px;
+}
 
 .page-title {
   font-family: var(--jost-font-family);
