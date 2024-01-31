@@ -16,7 +16,8 @@ import { DeleteIconSVG, EditIconSVG } from "../../utils/SVGs/SVGs";
 import ReactTableFooter from "../../Templates/ReactTableFooter/ReactTableFooter";
 
 const Leads = () => {
-  const { initialState, getAllLeads } = useContext(ContextMain);
+  const { initialState, getAllLeads, getAllCustomers } =
+    useContext(ContextMain);
   const [isUpdated, setIsUpdated] = useState(false);
 
   const columnHeaders = ["Sr no.", "Name", "Company", "Actions"];
@@ -32,6 +33,7 @@ const Leads = () => {
 
   useEffect(() => {
     getAllLeads();
+    getAllCustomers();
   }, [isUpdated]);
 
   const tableColumns = [
