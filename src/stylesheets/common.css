@@ -50,6 +50,7 @@
   line-height: 1;
   background-color: var(--primary-green-color);
   border: 0;
+  border-radius: 0;
   color: #e0fbfc;
   min-height: 33px;
 }
@@ -177,4 +178,65 @@ input.gotoPage-input-field::-webkit-inner-spin-button {
 
 span.download-icon-svg-parent-wrapper {
   margin-top: 5px;
+}
+
+/* -----------Modal CSS---------------- */
+.modal-content {
+  border-radius: 0;
+  background-color: #d3e4cd;
+}
+
+.modal-title {
+  font-family: var(--jost-font-family);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--blue-font-color);
+  text-align: center;
+  padding: 12px 0px;
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--primary-green-color);
+  width: 85%;
+  margin: 0px auto;
+}
+
+.modal-content .modal-body {
+  width: 85%;
+  margin: 0px auto;
+  padding: 30px 0px;
+}
+
+.modal-content .modal-body form .group label {
+  font-family: var(--jost-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--blue-font-color);
+  padding-bottom: 4px;
+}
+
+.modal-content .modal-body form .group input,
+.modal-content .modal-body form .group select {
+  border: 0;
+  border-bottom: 2px solid #519538;
+  border-radius: 0;
+  font-family: var(--jost-font-family);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--blue-font-color);
+  background-color: transparent;
+}
+
+.modal-content .modal-body form .group input:focus,
+.modal-content .modal-body form .group select:focus {
+  outline: 2px solid #519538;
+  border-radius: var(--primary-radius);
+  border: 0;
+}
+
+.modal-content .modal-body form button {
+  margin: 20px 0px 0px 0px;
 }

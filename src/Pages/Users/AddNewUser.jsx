@@ -78,16 +78,13 @@ const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
     >
       <Modal.Header className="pt-3 pb-1" closeButton>
         <Modal.Title className="w-100" id="contained-modal-title-vcenter">
-          <div className="d-flex justify-content-center align-items-center gap-3">
-            {/* <img src={projectsIcon} height={20} width={20} alt="user-icon" /> */}
-            <span className="modal-title">New User</span>
-          </div>
+          New User
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body className="modal-body">
+      <Modal.Body>
         <form
           onSubmit={handleAddNewUser}
-          className="d-flex flex-column gap-2 justify-content-center align-items-center"
+          className="d-flex flex-column gap-3 justify-content-center align-items-center"
         >
           <div className="group">
             <label htmlFor="name">Name</label>
@@ -153,8 +150,8 @@ const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
             />
           </div>
 
-          <button type="submit" className="custom-btn" disabled={isDisabled}>
-            {isDisabled ? <SpinningLoader /> : "Add"}
+          <button type="submit" className="cta-btn" disabled={isDisabled}>
+            {isDisabled ? <SpinningLoader /> : "Add New User"}
           </button>
         </form>
       </Modal.Body>
