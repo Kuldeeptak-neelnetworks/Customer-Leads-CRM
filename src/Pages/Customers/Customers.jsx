@@ -12,6 +12,8 @@ import {
   usePagination,
 } from "react-table";
 import PageHeader from "../../Templates/PageHeader/PageHeader";
+import { DeleteIconSVG, EditIconSVG } from "../../utils/SVGs/SVGs";
+import ReactTableFooter from "../../Templates/ReactTableFooter/ReactTableFooter";
 
 const Customers = () => {
   const { initialState, getAllCustomers } = useContext(ContextMain);
@@ -25,6 +27,17 @@ const Customers = () => {
     "Contact",
     "Actions",
   ];
+
+  // constructing headers for CSV Link
+  const headers = {
+    headings: [
+      { label: "Name", key: "contact_name" },
+      { label: "Email Id", key: "email_address" },
+      { label: "Company", key: "company_name" },
+      { label: "Contact", key: "mobile_no" },
+    ],
+    fileName: "Customers",
+  };
 
   useEffect(() => {
     getAllCustomers();
@@ -55,9 +68,10 @@ const Customers = () => {
     {
       Header: "Actions",
       Cell: ({ row }) => (
-        <div className="table-actions-wrapper d-flex justify-content-center align-items-center gap-4">
-          <button className="edit-btn">Edit</button>
-          <button className="delete-btn">Delete</button>
+        <div className="table-actions-wrapper d-flex justify-content-center align-items-center gap-2">
+          <EditIconSVG cssClass={"cursor-pointer"} />
+          <span style={{ color: "#00263d38" }}>|</span>
+          <DeleteIconSVG cssClass={"cursor-pointer"} />
         </div>
       ),
     },
@@ -80,14 +94,26 @@ const Customers = () => {
 
   return (
     <div className="main-wrapper">
-      <PageHeader heading={"Customers"}>
-        {userRole !== 1 && <AddNewCustomer setIsUpdated={setIsUpdated} />}
+      <PageHeader heading={"Customers"} tableInstance={tableInstance}>
+        {userRole !== 1 && (
+          <AddNewCustomer
+            setIsUpdated={setIsUpdated}
+            customers={initialState.customers}
+          />
+        )}
       </PageHeader>
 
       {initialState.isLoading ? (
         <ReactSkeletonTable columnHeaders={columnHeaders} />
       ) : initialState.customers.length > 0 ? (
-        <ReactTable tableInstance={tableInstance} />
+        <>
+          <ReactTable tableInstance={tableInstance} />
+          <ReactTableFooter
+            data={initialState.customers}
+            tableInstance={tableInstance}
+            headers={headers}
+          />
+        </>
       ) : (
         <p className="m-0">No Customers Found!</p>
       )}
