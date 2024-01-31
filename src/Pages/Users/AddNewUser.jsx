@@ -5,10 +5,15 @@ import Modal from "react-bootstrap/Modal";
 import ReactHotToast from "../../utils/ReactHotToast/ReactHotToast";
 import { apiUrl, headerOptions } from "../../utils/Constants/constants";
 import { SpinningLoader } from "../../Templates/SpinningLoader/SpinningLoader";
-import { PlusIconSVG } from "../../utils/SVGs/SVGs";
+import {
+  EyeIconDisabledSVG,
+  EyeIconSVG,
+  PlusIconSVG,
+} from "../../utils/SVGs/SVGs";
 
 const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
   const [isDisabled, setIsDisabled] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -16,6 +21,7 @@ const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
     userRoles: "",
     contact_no: "",
     address: "",
+    profilePic: "",
   });
 
   const handleChange = (e) => {
@@ -23,11 +29,23 @@ const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
     setUser((prev) => ({ ...prev, [id]: value }));
   };
 
-  const addNewUser = async () => {
+  const addNewUser = async (event) => {
     try {
       setIsDisabled(true);
+
+      const formData = new FormData(event.currentTarget);
+      formData.append("name", user.name);
+      formData.append("email", user.email);
+      formData.append("password", user.password);
+      formData.append("userRoles", user.userRoles);
+      formData.append("contact_no", user.contact_no);
+      formData.append("address", user.address);
+      formData.append("profile_pic", user.profilePic);
+
       const url = `${apiUrl}/add/user`;
-      const result = await axios.post(url, user, { headers: headerOptions() });
+      const result = await axios.post(url, formData, {
+        headers: headerOptions(true),
+      });
 
       console.log("result add new user: ", result);
       if (result.status === 201) {
@@ -41,7 +59,9 @@ const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
           userRoles: "",
           contact_no: "",
           address: "",
+          profilePic: "",
         });
+        // formData.reset();
       }
     } catch (e) {
       ReactHotToast(e.response.data.message, "error");
@@ -62,7 +82,7 @@ const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
     ].every(Boolean);
 
     if (bool) {
-      addNewUser();
+      addNewUser(e);
     } else {
       ReactHotToast("Fill all the Details!", "error");
     }
@@ -108,13 +128,33 @@ const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
           </div>
           <div className="group">
             <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              value={user.password}
-              onChange={(e) => handleChange(e)}
-              required
-            />
+            <div className="position-relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                className="position-relative w-100"
+                id="password"
+                value={user.password}
+                onChange={(e) => handleChange(e)}
+                required
+              />
+              {showPassword ? (
+                <div onClick={() => setShowPassword((prev) => !prev)}>
+                  <EyeIconSVG
+                    cssClass={
+                      "position-absolute password-eye-icon not-login-form"
+                    }
+                  />
+                </div>
+              ) : (
+                <div onClick={() => setShowPassword((prev) => !prev)}>
+                  <EyeIconDisabledSVG
+                    cssClass={
+                      "position-absolute password-eye-icon not-login-form"
+                    }
+                  />
+                </div>
+              )}
+            </div>
           </div>
           <div className="group">
             <label htmlFor="userRoles">User Role</label>
@@ -147,6 +187,17 @@ const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
               value={user.address}
               onChange={(e) => handleChange(e)}
               required
+            />
+          </div>
+          <div className="group">
+            <label htmlFor="profilePic">Profile Picture (optional)</label>
+            <input
+              type="file"
+              id="profilePic"
+              accept="image/png, image/jpeg"
+              onChange={(e) =>
+                setUser((prev) => ({ ...prev, profilePic: e.target.files[0] }))
+              }
             />
           </div>
 

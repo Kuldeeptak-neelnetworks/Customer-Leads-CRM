@@ -34,11 +34,26 @@ const Users = () => {
     getAllUsers();
   }, [isUpdated]);
 
+  const getProfile = (input) =>
+    JSON.parse(input?.additionalData?.users_metas)?.profile_picture;
+
   const tableColumns = [
     {
       Header: "Sr no.",
       accessor: "sr no.",
       Cell: ({ row }) => row.index + 1,
+    },
+    {
+      Header: "Profile",
+      Cell: ({ row }) => {
+        const profilePic = getProfile(row.original);
+        const imgUrl = profilePic
+          ? `https://crm.neelnetworks.org/${profilePic}`
+          : "https://neelnetworks.org/dummy.jpg";
+        return (
+          <img src={imgUrl} alt="profile-image" className="profile-image" />
+        );
+      },
     },
     {
       Header: "Name",

@@ -240,3 +240,12 @@ span.download-icon-svg-parent-wrapper {
 .modal-content .modal-body form button {
   margin: 20px 0px 0px 0px;
 }
+
+/* --------- */
+.profile-image {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: #bfbfbf;
+  object-fit: cover;
+}
