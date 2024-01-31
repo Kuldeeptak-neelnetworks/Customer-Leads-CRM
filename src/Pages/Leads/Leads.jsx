@@ -16,22 +16,22 @@ import { DeleteIconSVG, EditIconSVG } from "../../utils/SVGs/SVGs";
 import ReactTableFooter from "../../Templates/ReactTableFooter/ReactTableFooter";
 
 const Leads = () => {
-  const { initialState, getAllCustomers } = useContext(ContextMain);
+  const { initialState, getAllLeads } = useContext(ContextMain);
   const [isUpdated, setIsUpdated] = useState(false);
 
-  const columnHeaders = ["Sr no.", "Name", "Email ID", "Actions"];
+  const columnHeaders = ["Sr no.", "Name", "Company", "Actions"];
 
   // constructing headers for CSV Link
   const headers = {
     headings: [
-      { label: "Name", key: "name" },
-      { label: "Email Id", key: "email" },
+      { label: "Name", key: "contact_name" },
+      { label: "Company", key: "company_name" },
     ],
     fileName: "Leads",
   };
 
   useEffect(() => {
-    getAllCustomers();
+    getAllLeads();
   }, [isUpdated]);
 
   const tableColumns = [
@@ -42,15 +42,19 @@ const Leads = () => {
     },
     {
       Header: "Name",
-      accessor: "name",
-    },
-    {
-      Header: "Email ID",
-      accessor: "email",
+      accessor: "contact_name",
     },
     {
       Header: "Company",
       accessor: "company_name",
+    },
+    {
+      Header: "Status",
+      accessor: "status",
+      Cell: ({ row }) =>
+        row.original.status === "not_sell"
+          ? "Not Confirmed Customer"
+          : "Confirmed Customer",
     },
     {
       Header: "Actions",
@@ -78,9 +82,10 @@ const Leads = () => {
   );
 
   const userRole = +JSON.parse(localStorage.getItem("user")).userRoles;
+
   return (
     <div className="main-wrapper">
-      <PageHeader heading={"Leads"}>
+      <PageHeader heading={"Leads"} tableInstance={tableInstance}>
         {userRole !== 1 && (
           <AddNewLead
             setIsUpdated={setIsUpdated}

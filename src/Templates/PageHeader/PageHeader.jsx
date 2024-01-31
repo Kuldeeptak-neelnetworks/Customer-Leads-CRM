@@ -1,6 +1,8 @@
 import searchIcon from "../../assets/search-icon.svg";
 
-const PageHeader = ({ heading, children }) => {
+const PageHeader = ({ heading, tableInstance, children }) => {
+  const { state, setGlobalFilter } = tableInstance;
+  const { globalFilter } = state;
   return (
     <div className="d-flex justify-content-between align-items-center">
       <h2 className="page-heading">{heading}</h2>
@@ -11,10 +13,10 @@ const PageHeader = ({ heading, children }) => {
             className="input-field w-100"
             type="text"
             placeholder="Search"
-            //   value={globalFilter || ""}
-            //   onChange={(e) => {
-            //     setGlobalFilter(e.target.value);
-            //   }}
+            value={globalFilter || ""}
+            onChange={(e) => {
+              setGlobalFilter(e.target.value);
+            }}
           />
         </div>
         {children}

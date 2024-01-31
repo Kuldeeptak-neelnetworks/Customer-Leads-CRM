@@ -5,6 +5,7 @@ import Modal from "react-bootstrap/Modal";
 import ReactHotToast from "../../utils/ReactHotToast/ReactHotToast";
 import { apiUrl, headerOptions } from "../../utils/Constants/constants";
 import { SpinningLoader } from "../../Templates/SpinningLoader/SpinningLoader";
+import { PlusIconSVG } from "../../utils/SVGs/SVGs";
 
 const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
   const [isDisabled, setIsDisabled] = useState(false);
@@ -166,13 +167,12 @@ export const AddNewUser = ({ setIsUpdated }) => {
 
   return (
     <>
-      <div
-        onClick={() => {
-          setModalShow(true);
-        }}
-      >
-        <button className="add-new-btn">Add New User</button>
-      </div>
+      <button onClick={() => setModalShow(true)} className="cta-btn w-50">
+        Add New User
+        <span>
+          <PlusIconSVG />
+        </span>
+      </button>
 
       <MyVerticallyCenteredModal
         show={modalShow}

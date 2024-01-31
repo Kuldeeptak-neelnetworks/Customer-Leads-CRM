@@ -135,18 +135,12 @@ export const AddNewLead = ({ setIsUpdated, customers }) => {
 
   return (
     <>
-      <div
-        onClick={() => {
-          setModalShow(true);
-        }}
-      >
-        <button className="cta-btn w-50">
-          Add New Lead
-          <span>
-            <PlusIconSVG />
-          </span>
-        </button>
-      </div>
+      <button onClick={() => setModalShow(true)} className="cta-btn w-50">
+        Add New Lead
+        <span>
+          <PlusIconSVG />
+        </span>
+      </button>
 
       <MyVerticallyCenteredModal
         show={modalShow}
