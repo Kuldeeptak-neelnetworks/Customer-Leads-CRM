@@ -103,9 +103,9 @@ const Customers = () => {
         )}
       </PageHeader>
 
-      {initialState.isLoading ? (
+      {initialState.isLoading && initialState?.customers?.length <= 0 ? (
         <ReactSkeletonTable columnHeaders={columnHeaders} />
-      ) : initialState.customers.length > 0 ? (
+      ) : initialState?.customers?.length > 0 ? (
         <>
           <ReactTable tableInstance={tableInstance} />
           <ReactTableFooter

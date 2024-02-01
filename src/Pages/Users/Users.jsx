@@ -105,9 +105,9 @@ const Users = () => {
         <AddNewUser setIsUpdated={setIsUpdated} />
       </PageHeader>
 
-      {initialState.isLoading ? (
+      {initialState.isLoading && initialState?.users?.length <= 0 ? (
         <ReactSkeletonTable columnHeaders={columnHeaders} />
-      ) : initialState.users.length > 0 ? (
+      ) : initialState?.users?.length > 0 ? (
         <>
           <ReactTable tableInstance={tableInstance} />
           <ReactTableFooter
