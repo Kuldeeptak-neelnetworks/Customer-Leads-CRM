@@ -274,3 +274,47 @@ span.download-icon-svg-parent-wrapper {
   border-radius: 10px;
   margin-top: 3px;
 }
+
+/* ------------------- */
+.dashboard-block {
+  padding: 25px;
+  border: 1px solid var(--primary-green-color);
+  box-sizing: border-box;
+  max-width: 400px;
+}
+
+.dashboard-block h4 {
+  font-family: var(--jost-font-family);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--primary-black-color);
+}
+
+ul.block-data-wrapper {
+  padding-left: 1rem;
+}
+
+ul.block-data-wrapper li {
+  margin-bottom: 10px;
+}
+
+ul.block-data-wrapper li::marker {
+  font-size: 18px;
+  color: var(--primary-green-color);
+}
+
+ul.block-data-wrapper li p {
+  margin-bottom: 4px;
+  font-family: var(--roboto-font-family);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.5px;
+  color: var(--blue-font-color);
+  word-break: break-all;
+}
+
+ul.block-data-wrapper li p span {
+  font-weight: 500;
+}
