@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 // routes
 import Login from "./Pages/Login/Login";
 import ForgotPassword from "./Pages/ForgotPassword/ForgotPassword";
+import ResetPassword from "./Pages/ResetPassword/ResetPassword";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Leads from "./Pages/Leads/Leads";
 import Customers from "./Pages/Customers/Customers";
@@ -43,6 +44,7 @@ function App() {
       <Routes>
         <Route index path="/" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="*" element={<NoPage />} />
         <Route element={<TokenAuth />}>
           <Route
