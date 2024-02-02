@@ -46,30 +46,6 @@ const Leads = () => {
     getAllCustomers();
   }, [isUpdated]);
 
-  // useEffect(() => {
-  //   let leadsConfirmed, leadsNotConfirmed;
-  //   if (userRole === 1) {
-  //     leadsConfirmed = initialState.leads.filter(
-  //       ({ status }) => status !== "not_sell"
-  //     );
-  //     leadsNotConfirmed = initialState.leads.filter(
-  //       ({ status }) => status === "not_sell"
-  //     );
-  //   } else {
-  //     leadsConfirmed = initialState.myLeads.filter(
-  //       ({ status }) => status !== "not_sell"
-  //     );
-  //     leadsNotConfirmed = initialState.myLeads.filter(
-  //       ({ status }) => status === "not_sell"
-  //     );
-  //   }
-
-  //   setLeads(() => ({
-  //     confirmedLeads: leadsConfirmed,
-  //     notConfirmedLeads: leadsNotConfirmed,
-  //   }));
-  // }, [initialState.leads, initialState.myLeads]);
-
   useEffect(() => {
     const isUserAdmin = userRole === 1;
 
@@ -142,6 +118,12 @@ const Leads = () => {
     usePagination
   );
 
+  const showLoading =
+    initialState.isLoading &&
+    (userRole === 1
+      ? initialState.leads.length <= 0
+      : initialState.myLeads.length <= 0);
+
   return (
     <div className="main-wrapper">
       <PageHeader heading={"Leads"} tableInstance={tableInstance}>
@@ -170,12 +152,12 @@ const Leads = () => {
         </div>
       </section>
 
-      {initialState.isLoading ? (
+      {showLoading ? (
         <ReactSkeletonTable columnHeaders={columnHeaders} />
       ) : (
           toggle
             ? leads?.confirmedLeads?.length > 0
-            : leads?.notConfirmedLeads.length > 0
+            : leads?.notConfirmedLeads?.length > 0
         ) ? (
         <>
           <ReactTable tableInstance={tableInstance} />

@@ -1,5 +1,4 @@
 import { useContext, useEffect } from "react";
-import searchIcon from "../../assets/search-icon.svg";
 import { ContextMain } from "../../Context/MainContext";
 
 const Dashboard = () => {
@@ -23,29 +22,86 @@ const Dashboard = () => {
     getAllCustomers();
   }, []);
 
+  const blockData = (data) => [...data].reverse();
+
   return (
     <div className="main-wrapper">
       <div className="d-flex justify-content-between align-items-center">
         <h2 className="page-heading">Dashboard</h2>
-        {/* <div className="d-flex justify-content-end align-items-center gap-4 w-35">
-          <div className="position-relative w-50">
-            <img className="search-icon" src={searchIcon} alt="search-icon" />
-            <input
-              className="input-field w-100"
-              type="text"
-              placeholder="Search"
-              // value={globalFilter || ""}
-              // onChange={(e) => {
-              //   setGlobalFilter(e.target.value);
-              // }}
-            />
-          </div>
-        </div> */}
       </div>
 
-      {/* React Table */}
-
-      {/* React Table Footer */}
+      <section className="mt-4 mb-3 d-flex justify-content-center gap-4 flex-wrap">
+        {/* New Leads */}
+        <div className="dashboard-block">
+          <h4>Latest Leads</h4>
+          {(
+            userRole === 1
+              ? initialState?.leads?.length > 0
+              : initialState?.myLeads?.length > 0
+          ) ? (
+            <ul className="block-data-wrapper mt-3">
+              {blockData(
+                userRole === 1 ? initialState?.leads : initialState?.myLeads
+              )?.map((lead) => (
+                <li key={lead.id}>
+                  <p>
+                    <span>Name:</span> {lead.contact_name}
+                  </p>
+                  <p>
+                    <span>Company:</span> {lead.company_name}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="m-0">No Leads Found!</p>
+          )}
+        </div>
+        {/* New Customers */}
+        <div className="dashboard-block">
+          <h4>Latest Customers</h4>
+          {initialState?.customers?.length > 0 ? (
+            <ul className="block-data-wrapper mt-3">
+              {blockData(initialState?.customers)?.map((customer) => (
+                <li key={customer.id}>
+                  <p>
+                    <span>Name:</span> {customer.contact_name}
+                  </p>
+                  <p>
+                    <span>Company:</span> {customer.company_name}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="m-0">No Customers Found!</p>
+          )}
+        </div>
+        {/* New Salespersons */}
+        {userRole === 1 && (
+          <div className="dashboard-block">
+            <h4>Latest Sales Persons</h4>
+            {initialState?.users?.length > 0 ? (
+              <ul className="block-data-wrapper mt-3">
+                {blockData(initialState?.users)
+                  ?.filter(({ userRoles }) => userRoles === "SalesPerson")
+                  ?.map((user) => (
+                    <li key={user.id}>
+                      <p>
+                        <span>Name:</span> {user.name}
+                      </p>
+                      <p>
+                        <span>Email Id:</span> {user.email}
+                      </p>
+                    </li>
+                  ))}
+              </ul>
+            ) : (
+              <p className="m-0">No Users Found!</p>
+            )}
+          </div>
+        )}
+      </section>
     </div>
   );
 };

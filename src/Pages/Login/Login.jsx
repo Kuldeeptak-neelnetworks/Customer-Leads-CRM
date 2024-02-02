@@ -73,6 +73,12 @@ const Login = () => {
           <img src={avatar} alt="avatar" />
           <h2 className="login-heading">Welcome</h2>
         </div>
+        <div className="pt-3">
+          <h4 className="page-title">Login</h4>
+          <p className="m-0 page-text pt-1 pb-3">
+            Enter your Email Id & password
+          </p>
+        </div>
         <form className="login-form" onSubmit={handleSubmit}>
           <div className="group mb-4">
             <label htmlFor="email">Email Id</label>
