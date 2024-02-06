@@ -1,5 +1,6 @@
 import { useContext, useEffect, useMemo, useState } from "react";
 import { ContextMain } from "../../Context/MainContext";
+import { Tooltip } from "react-tooltip";
 
 import ReactSkeletonTable from "../../Templates/ReactSkeletonTable/ReactSkeletonTable";
 import ReactTable from "../../Templates/ReactTable/ReactTable";
@@ -14,8 +15,10 @@ import {
 import PageHeader from "../../Templates/PageHeader/PageHeader";
 import { DeleteIconSVG, EditIconSVG } from "../../utils/SVGs/SVGs";
 import ReactTableFooter from "../../Templates/ReactTableFooter/ReactTableFooter";
+import { useNavigate } from "react-router-dom";
 
 const Leads = () => {
+  const navigate = useNavigate();
   const { initialState, getAllLeads, getAllCustomers, getMyLeads } =
     useContext(ContextMain);
   const [isUpdated, setIsUpdated] = useState(false);
@@ -82,19 +85,42 @@ const Leads = () => {
       Header: "Company",
       accessor: "company_name",
     },
-    // {
-    //   Header: "Status",
-    //   accessor: "status",
-    //   Cell: ({ row }) =>
-    //     row.original.status === "not_sell"
-    //       ? "Not Confirmed Customer"
-    //       : "Confirmed Customer",
-    // },
+    {
+      Header: "Rep Name",
+      accessor: "rep_name",
+    },
+    {
+      Header: "Rep Pic",
+      Cell: ({ row }) => {
+        const profilePic = row.original?.rep_pic;
+        const imgUrl = profilePic
+          ? `https://crm.neelnetworks.org/${profilePic}`
+          : "https://neelnetworks.org/dummy.jpg";
+        return (
+          <img src={imgUrl} alt="profile-image" className="profile-image" />
+        );
+      },
+    },
     {
       Header: "Actions",
       Cell: ({ row }) => (
         <div className="table-actions-wrapper d-flex justify-content-center align-items-center gap-2">
-          <EditIconSVG cssClass={"cursor-pointer"} />
+          <Tooltip
+            id="edit-lead-tooltip"
+            style={{
+              background: "#000",
+              color: "#fff",
+            }}
+            opacity={0.9}
+          />
+          <div
+            data-tooltip-id="edit-lead-tooltip"
+            data-tooltip-content="Edit Lead Details"
+            data-tooltip-place="top"
+            onClick={() => navigate(`/leads/${row.original?.id}`)}
+          >
+            <EditIconSVG cssClass={"cursor-pointer"} />
+          </div>
           <span style={{ color: "#00263d38" }}>|</span>
           <DeleteIconSVG cssClass={"cursor-pointer"} />
         </div>
