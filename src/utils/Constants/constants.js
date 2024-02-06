@@ -9,7 +9,6 @@ const getToken = () => {
 };
 
 // api headers
-
 export const headerOptions = (isFormData) => ({
   "Content-Type": isFormData ? "multipart/form-data" : "application/json",
   Accept: "application/json",

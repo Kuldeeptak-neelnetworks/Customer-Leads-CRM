@@ -82,14 +82,14 @@ const Leads = () => {
       Header: "Company",
       accessor: "company_name",
     },
-    {
-      Header: "Status",
-      accessor: "status",
-      Cell: ({ row }) =>
-        row.original.status === "not_sell"
-          ? "Not Confirmed Customer"
-          : "Confirmed Customer",
-    },
+    // {
+    //   Header: "Status",
+    //   accessor: "status",
+    //   Cell: ({ row }) =>
+    //     row.original.status === "not_sell"
+    //       ? "Not Confirmed Customer"
+    //       : "Confirmed Customer",
+    // },
     {
       Header: "Actions",
       Cell: ({ row }) => (
