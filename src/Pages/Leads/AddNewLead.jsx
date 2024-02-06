@@ -15,7 +15,7 @@ const MyVerticallyCenteredModal = ({
 }) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [lead, setLead] = useState({
-    customer: { label: "", value: "" },
+    customer: "",
     // phone_no: "",
     // address: "",
   });
@@ -30,7 +30,7 @@ const MyVerticallyCenteredModal = ({
       setIsDisabled(true);
 
       const formData = new FormData(event.currentTarget);
-      formData.append("customer_id", lead.customer.value);
+      formData.append("customer_id", lead.customer);
 
       const url = `${apiUrl}/leads`;
       // const result = await axios.post(
@@ -69,8 +69,7 @@ const MyVerticallyCenteredModal = ({
   const handleAddNewLead = (e) => {
     e.preventDefault();
     // const bool = [lead.customer, lead.address, lead.phone_no].every(Boolean);
-
-    if (lead.customer.value) {
+    if (lead.customer) {
       addNewLead(e);
     } else {
       ReactHotToast("Please select Customer!", "error");
