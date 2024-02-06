@@ -141,13 +141,14 @@ const EditLead = () => {
           <input
             type="checkbox"
             id="status"
-            value={lead.status}
-            onChange={(e) =>
+            // value={lead.status}
+            onChange={(e) => {
+              console.log("=> ", e.target.checked);
               setLead((prev) => ({
                 ...prev,
-                status: e.target.checked,
-              }))
-            }
+                status: !prev.status,
+              }));
+            }}
             checked={lead.status}
           />
         </div>
