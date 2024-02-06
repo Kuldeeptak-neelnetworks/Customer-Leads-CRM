@@ -277,35 +277,69 @@ span.download-icon-svg-parent-wrapper {
 
 /* ------------------- */
 .dashboard-block {
-  padding: 25px;
-  border: 1px solid var(--primary-green-color);
+  padding: 25px 50px 0px 50px;
+  /* border: 1px solid var(--primary-green-color); */
   box-sizing: border-box;
   max-width: 400px;
+  text-align: center;
+  position: relative;
+}
+
+.dashboard-block.before::before,
+.dashboard-block.after::after {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 1px;
+  border-radius: 10px;
+  margin: 10px auto;
+  background-color: var(--primary-green-color);
+  opacity: 1;
+}
+.dashboard-block.before::before {
+  left: 0;
+  top: 0;
+}
+.dashboard-block.after::after {
+  right: 0;
+  top: 0;
 }
 
 .dashboard-block h4 {
   font-family: var(--jost-font-family);
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   line-height: 1;
-  color: var(--primary-black-color);
+  color: var(--blue-font-color);
+}
+.dashboard-block h4::after {
+  content: "";
+  display: block;
+  height: 1px;
+  width: 70px;
+  border-radius: 10px;
+  margin: 10px auto;
+  background-color: var(--blue-font-color);
+  opacity: 0.5;
 }
 
 ul.block-data-wrapper {
-  padding-left: 1rem;
+  padding-left: 0;
 }
 
 ul.block-data-wrapper li {
-  margin-bottom: 10px;
+  margin-bottom: 1.75rem;
+  list-style: none;
 }
 
-ul.block-data-wrapper li::marker {
+/* ul.block-data-wrapper li::marker {
   font-size: 18px;
   color: var(--primary-green-color);
-}
+} */
 
 ul.block-data-wrapper li p {
-  margin-bottom: 4px;
+  margin-bottom: 5px;
   font-family: var(--roboto-font-family);
   font-size: 15px;
   font-weight: 400;

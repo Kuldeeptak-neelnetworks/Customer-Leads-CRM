@@ -39,7 +39,7 @@ const Dashboard = () => {
               ? initialState?.leads?.length > 0
               : initialState?.myLeads?.length > 0
           ) ? (
-            <ul className="block-data-wrapper mt-3">
+            <ul className="block-data-wrapper mt-5">
               {blockData(
                 userRole === 1 ? initialState?.leads : initialState?.myLeads
               )?.map((lead) => (
@@ -58,10 +58,10 @@ const Dashboard = () => {
           )}
         </div>
         {/* New Customers */}
-        <div className="dashboard-block">
-          <h4>Latest Customers</h4>
+        <div className="dashboard-block before after">
+          <h4>New Customers</h4>
           {initialState?.customers?.length > 0 ? (
-            <ul className="block-data-wrapper mt-3">
+            <ul className="block-data-wrapper mt-5">
               {blockData(initialState?.customers)?.map((customer) => (
                 <li key={customer.id}>
                   <p>
@@ -80,9 +80,9 @@ const Dashboard = () => {
         {/* New Salespersons */}
         {userRole === 1 && (
           <div className="dashboard-block">
-            <h4>Latest Sales Persons</h4>
+            <h4>New Salespersons</h4>
             {initialState?.users?.length > 0 ? (
-              <ul className="block-data-wrapper mt-3">
+              <ul className="block-data-wrapper mt-5">
                 {blockData(initialState?.users)
                   ?.filter(({ userRoles }) => userRoles === "SalesPerson")
                   ?.map((user) => (
