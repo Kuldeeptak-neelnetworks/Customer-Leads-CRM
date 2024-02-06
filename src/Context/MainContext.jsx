@@ -12,6 +12,7 @@ export const MainContext = ({ children }) => {
     leads: [],
     myLeads: [],
     customers: [],
+    myCustomers: [],
     isLoading: false,
   });
 

@@ -7,6 +7,7 @@ import ForgotPassword from "./Pages/ForgotPassword/ForgotPassword";
 import ResetPassword from "./Pages/ResetPassword/ResetPassword";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Leads from "./Pages/Leads/Leads";
+import EditLead from "./Pages/Leads/EditLead";
 import Customers from "./Pages/Customers/Customers";
 import Users from "./Pages/Users/Users";
 import Profile from "./Pages/Profile/Profile";
@@ -62,6 +63,15 @@ function App() {
               <>
                 <HeaderAndSiderbar />
                 <Leads />
+              </>
+            }
+          />
+          <Route
+            path="/leads/:leadId"
+            element={
+              <>
+                <HeaderAndSiderbar />
+                <EditLead />
               </>
             }
           />

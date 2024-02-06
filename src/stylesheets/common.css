@@ -33,6 +33,7 @@
   font-size: 32px;
   font-weight: 700;
   line-height: 1;
+  width: max-content;
 }
 .page-heading::after {
   content: "";
@@ -41,6 +42,7 @@
   background-color: var(--primary-green-color);
   border-radius: 10px;
   margin-top: 8px;
+  width: 100%;
 }
 
 .cta-btn {
@@ -208,7 +210,8 @@ span.download-icon-svg-parent-wrapper {
   padding: 30px 0px;
 }
 
-.modal-content .modal-body form .group label {
+/* .modal-content .modal-body */
+form .group label {
   font-family: var(--jost-font-family);
   font-size: 16px;
   font-weight: 400;
@@ -217,8 +220,10 @@ span.download-icon-svg-parent-wrapper {
   padding-bottom: 4px;
 }
 
-.modal-content .modal-body form .group input,
-.modal-content .modal-body form .group select {
+/* .modal-content .modal-body */
+/* .modal-content .modal-body */
+form .group input,
+form .group select {
   border: 0;
   border-bottom: 2px solid #519538;
   border-radius: 0;
@@ -230,15 +235,30 @@ span.download-icon-svg-parent-wrapper {
   background-color: transparent;
 }
 
-.modal-content .modal-body form .group input:focus,
-.modal-content .modal-body form .group select:focus {
+/* .modal-content .modal-body */
+/* .modal-content .modal-body */
+form .group input:focus,
+form .group select:focus {
   outline: 2px solid #519538;
   border-radius: var(--primary-radius);
   border: 0;
 }
 
-.modal-content .modal-body form button {
+/* .modal-content .modal-body */
+form button {
   margin: 20px 0px 0px 0px;
+}
+
+form .group input[type="checkbox"] {
+  height: 16px;
+  width: 16px;
+}
+form .group input[type="checkbox"]:focus {
+  outline: none;
+}
+
+form .group input:disabled {
+  cursor: not-allowed;
 }
 
 /* --------- */

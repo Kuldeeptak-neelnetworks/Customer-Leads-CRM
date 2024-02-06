@@ -30,7 +30,7 @@ const Dashboard = () => {
         <h2 className="page-heading">Dashboard</h2>
       </div>
 
-      <section className="mt-4 mb-3 d-flex justify-content-center gap-4 flex-wrap">
+      <section className="mt-4 mb-3 d-flex justify-content-center flex-wrap">
         {/* New Leads */}
         <div className="dashboard-block">
           <h4>Latest Leads</h4>
@@ -58,7 +58,9 @@ const Dashboard = () => {
           )}
         </div>
         {/* New Customers */}
-        <div className="dashboard-block before after">
+        <div
+          className={`dashboard-block before ${userRole === 1 ? "after" : ""}`}
+        >
           <h4>New Customers</h4>
           {initialState?.customers?.length > 0 ? (
             <ul className="block-data-wrapper mt-5">
