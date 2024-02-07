@@ -16,8 +16,6 @@ const MyVerticallyCenteredModal = ({
   const [isDisabled, setIsDisabled] = useState(false);
   const [lead, setLead] = useState({
     customer: "",
-    // phone_no: "",
-    // address: "",
   });
 
   const handleChange = (e) => {
@@ -33,13 +31,6 @@ const MyVerticallyCenteredModal = ({
       formData.append("customer_id", lead.customer);
 
       const url = `${apiUrl}/leads`;
-      // const result = await axios.post(
-      //   url,
-      //   { customer_id: lead.customer },
-      //   {
-      //     headers: headerOptions(true),
-      //   }
-      // );
       const result = await axios.post(url, formData, {
         headers: headerOptions(true),
       });
@@ -52,12 +43,9 @@ const MyVerticallyCenteredModal = ({
         setIsUpdated((prev) => !prev);
         setLead({
           customer: "",
-          // phone_no: "",
-          // address: "",
         });
       }
     } catch (e) {
-      // ReactHotToast(e.response.data.message, "error");
       Object.values(e.response.data.error).forEach((error) =>
         ReactHotToast(error, "error")
       );
@@ -68,7 +56,6 @@ const MyVerticallyCenteredModal = ({
 
   const handleAddNewLead = (e) => {
     e.preventDefault();
-    // const bool = [lead.customer, lead.address, lead.phone_no].every(Boolean);
     if (lead.customer) {
       addNewLead(e);
     } else {
@@ -109,26 +96,6 @@ const MyVerticallyCenteredModal = ({
               ))}
             </select>
           </div>
-          {/* <div className="group">
-            <label htmlFor="phone_no">Landline</label>
-            <input
-              type="tel"
-              id="phone_no"
-              value={lead.phone_no}
-              onChange={(e) => handleChange(e)}
-              required
-            />
-          </div> */}
-          {/* <div className="group">
-            <label htmlFor="address">Address</label>
-            <input
-              type="text"
-              id="address"
-              value={lead.address}
-              onChange={(e) => handleChange(e)}
-              required
-            />
-          </div> */}
           <button type="submit" className="cta-btn" disabled={isDisabled}>
             {isDisabled ? <SpinningLoader /> : "Add New Lead"}
           </button>

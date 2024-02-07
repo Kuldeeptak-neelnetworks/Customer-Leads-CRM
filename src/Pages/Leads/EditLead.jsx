@@ -69,9 +69,9 @@ const EditLead = () => {
 
       const formData = new FormData(event.currentTarget);
       formData.append("customer", lead.customerId);
-      formData.append("url", lead.url);
+      formData.append("url", lead.url ?? "");
       formData.append("is_for_sale", lead.status ? 1 : 2);
-      formData.append("notes", lead.notes);
+      formData.append("notes", lead.notes ?? "");
       formData.append("lead", leadId);
 
       const url = `${apiUrl}/leads?_method=PUT`;
@@ -95,7 +95,6 @@ const EditLead = () => {
 
   const handleEditLead = (e) => {
     e.preventDefault();
-    console.log("lead: ", lead);
     editLead(e);
   };
 
