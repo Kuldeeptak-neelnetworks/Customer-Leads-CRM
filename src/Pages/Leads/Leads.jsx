@@ -19,8 +19,13 @@ import { useNavigate } from "react-router-dom";
 
 const Leads = () => {
   const navigate = useNavigate();
-  const { initialState, getAllLeads, getAllCustomers, getMyLeads } =
-    useContext(ContextMain);
+  const {
+    initialState,
+    getAllLeads,
+    getAllCustomers,
+    getMyCustomers,
+    getMyLeads,
+  } = useContext(ContextMain);
   const [isUpdated, setIsUpdated] = useState(false);
   const [leads, setLeads] = useState({
     confirmedLeads: [],
@@ -43,10 +48,11 @@ const Leads = () => {
   useEffect(() => {
     if (userRole === 1) {
       getAllLeads();
+      getAllCustomers();
     } else {
       getMyLeads();
+      getMyCustomers();
     }
-    getAllCustomers();
   }, [isUpdated]);
 
   useEffect(() => {
@@ -179,7 +185,9 @@ const Leads = () => {
         {userRole !== 1 && (
           <AddNewLead
             setIsUpdated={setIsUpdated}
-            customers={initialState.customers}
+            customers={
+              userRole === 1 ? initialState.customers : initialState.myCustomers
+            }
           />
         )}
       </PageHeader>
