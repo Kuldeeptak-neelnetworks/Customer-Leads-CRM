@@ -1,5 +1,6 @@
 import { useContext, useEffect } from "react";
 import { ContextMain } from "../../Context/MainContext";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const {
@@ -10,6 +11,7 @@ const Dashboard = () => {
     getAllUsers,
   } = useContext(ContextMain);
   const userRole = +JSON.parse(localStorage.getItem("user")).userRoles;
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (userRole === 1) {
@@ -44,7 +46,10 @@ const Dashboard = () => {
                 userRole === 1 ? initialState?.leads : initialState?.myLeads
               )?.map((lead) => (
                 <li key={lead.id}>
-                  <p>
+                  <p
+                    onClick={() => navigate(`/leads/${lead.id}`)}
+                    style={{ textDecoration: "underline", cursor: "pointer" }}
+                  >
                     <span>Name:</span> {lead.contact_name}
                   </p>
                   <p>
