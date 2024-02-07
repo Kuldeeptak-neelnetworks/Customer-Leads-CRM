@@ -52,8 +52,8 @@ const EditLead = () => {
       email: findCustomer?.email_address,
       contact: findCustomer?.mobile_no,
       status: findLead?.status === "sell" ? true : false,
-      notes: findLead?.Urls,
-      url: findLead?.notes,
+      url: findLead?.Urls,
+      notes: findLead?.notes,
     });
   }, [
     initialState.leads,
@@ -100,7 +100,9 @@ const EditLead = () => {
 
   return (
     <div className="main-wrapper">
-      <h2 className="page-heading">Edit Lead</h2>
+      <h2 className="page-heading">
+        {userRole === 1 ? "Lead Details" : "Edit Lead"}
+      </h2>
       <form
         onSubmit={handleEditLead}
         className="d-flex flex-column gap-3 mt-4 m-auto justify-content-center align-items-center w-25"
@@ -142,13 +144,16 @@ const EditLead = () => {
             id="status"
             // value={lead.status}
             onChange={(e) => {
-              console.log("=> ", e.target.checked);
-              setLead((prev) => ({
-                ...prev,
-                status: !prev.status,
-              }));
+              if (userRole !== 1) {
+                setLead((prev) => ({
+                  ...prev,
+                  status: !prev.status,
+                }));
+              }
             }}
             checked={lead.status}
+            readOnly={userRole === 1}
+            style={{ cursor: `${userRole === 1 ? "not-allowed" : "pointer"}` }}
           />
         </div>
         <div className="group">
@@ -163,6 +168,8 @@ const EditLead = () => {
                 url: e.target.value,
               }))
             }
+            disabled={userRole === 1}
+            readOnly={userRole === 1}
           />
         </div>
         <div className="group">
@@ -177,12 +184,16 @@ const EditLead = () => {
                 notes: e.target.value,
               }))
             }
+            disabled={userRole === 1}
+            readOnly={userRole === 1}
           />
         </div>
 
-        <button type="submit" className="cta-btn" disabled={isDisabled}>
-          {isDisabled ? <SpinningLoader /> : "Edit Lead"}
-        </button>
+        {userRole !== 1 && (
+          <button type="submit" className="cta-btn" disabled={isDisabled}>
+            {isDisabled ? <SpinningLoader /> : "Edit Lead"}
+          </button>
+        )}
       </form>
     </div>
   );

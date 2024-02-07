@@ -329,32 +329,6 @@ export const HandshakeIconSVG = ({ cssClass }) => {
   );
 };
 
-export const PlusIconSVG = ({ cssClass }) => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="13"
-      height="12"
-      viewBox="0 0 13 12"
-      fill="none"
-      className={cssClass}
-    >
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M0.984375 5.91252C0.984375 5.65517 1.193 5.44654 1.45035 5.44654H11.7018C11.9592 5.44654 12.1678 5.65517 12.1678 5.91252C12.1678 6.16987 11.9592 6.3785 11.7018 6.3785H1.45035C1.193 6.3785 0.984375 6.16987 0.984375 5.91252Z"
-        fill="currentColor"
-      />
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M6.57609 0.320801C6.83345 0.320801 7.04207 0.529426 7.04207 0.786777V11.0383C7.04207 11.2956 6.83345 11.5042 6.57609 11.5042C6.31874 11.5042 6.11012 11.2956 6.11012 11.0383V0.786777C6.11012 0.529426 6.31874 0.320801 6.57609 0.320801Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-};
-
 export const EditIconSVG = ({ cssClass }) => {
   return (
     <svg
@@ -495,6 +469,32 @@ export const DownloadIconSVG = ({ cssClass }) => {
         fillRule="evenodd"
         clipRule="evenodd"
         d="M0.976562 17.4069C0.976562 17.0122 1.29655 16.6922 1.69128 16.6922H17.4152C17.8099 16.6922 18.1299 17.0122 18.1299 17.4069C18.1299 17.8017 17.8099 18.1216 17.4152 18.1216H1.69128C1.29655 18.1216 0.976562 17.8017 0.976562 17.4069Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+};
+
+export const PlusIconSVG = ({ cssClass }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="13"
+      height="12"
+      viewBox="0 0 13 12"
+      fill="none"
+      className={cssClass}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M0.984375 5.91252C0.984375 5.65517 1.193 5.44654 1.45035 5.44654H11.7018C11.9592 5.44654 12.1678 5.65517 12.1678 5.91252C12.1678 6.16987 11.9592 6.3785 11.7018 6.3785H1.45035C1.193 6.3785 0.984375 6.16987 0.984375 5.91252Z"
+        fill="currentColor"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M6.57609 0.320801C6.83345 0.320801 7.04207 0.529426 7.04207 0.786777V11.0383C7.04207 11.2956 6.83345 11.5042 6.57609 11.5042C6.31874 11.5042 6.11012 11.2956 6.11012 11.0383V0.786777C6.11012 0.529426 6.31874 0.320801 6.57609 0.320801Z"
         fill="currentColor"
       />
     </svg>
