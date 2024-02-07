@@ -16,8 +16,11 @@ import { DeleteIconSVG, EditIconSVG } from "../../utils/SVGs/SVGs";
 import ReactTableFooter from "../../Templates/ReactTableFooter/ReactTableFooter";
 
 const Customers = () => {
-  const { initialState, getAllCustomers } = useContext(ContextMain);
+  const { initialState, getAllCustomers, getMyCustomers } =
+    useContext(ContextMain);
   const [isUpdated, setIsUpdated] = useState(false);
+
+  const userRole = +JSON.parse(localStorage.getItem("user")).userRoles;
 
   const columnHeaders = [
     "Sr no.",
@@ -40,7 +43,11 @@ const Customers = () => {
   };
 
   useEffect(() => {
-    getAllCustomers();
+    if (userRole === 1) {
+      getAllCustomers();
+    } else {
+      getMyCustomers();
+    }
   }, [isUpdated]);
 
   const tableColumns = [
@@ -78,7 +85,10 @@ const Customers = () => {
   ];
 
   const columns = useMemo(() => tableColumns, []);
-  const data = useMemo(() => initialState.customers, [initialState.customers]);
+  const data = useMemo(
+    () => (userRole === 1 ? initialState.customers : initialState.myCustomers),
+    [userRole, initialState.myCustomers, initialState.customers]
+  );
 
   const tableInstance = useTable(
     {
@@ -90,26 +100,34 @@ const Customers = () => {
     usePagination
   );
 
-  const userRole = +JSON.parse(localStorage.getItem("user")).userRoles;
+  // Checking if the customers data is not available
+  const customersDataNotAvailable =
+    userRole === 1
+      ? initialState?.customers?.length <= 0
+      : initialState?.myCustomers?.length <= 0;
+
+  // Checking if the customers data is not available && loading state is true
+  const isLoading = initialState.isLoading && customersDataNotAvailable;
+
+  // Checking if the customers data is available
+  const customersDataAvailable =
+    userRole === 1
+      ? initialState?.customers?.length > 0
+      : initialState?.myCustomers?.length > 0;
 
   return (
     <div className="main-wrapper">
       <PageHeader heading={"Customers"} tableInstance={tableInstance}>
-        {userRole !== 1 && (
-          <AddNewCustomer
-            setIsUpdated={setIsUpdated}
-            customers={initialState.customers}
-          />
-        )}
+        {userRole !== 1 && <AddNewCustomer setIsUpdated={setIsUpdated} />}
       </PageHeader>
 
-      {initialState.isLoading && initialState?.customers?.length <= 0 ? (
+      {isLoading ? (
         <ReactSkeletonTable columnHeaders={columnHeaders} />
-      ) : initialState?.customers?.length > 0 ? (
+      ) : customersDataAvailable ? (
         <>
           <ReactTable tableInstance={tableInstance} />
           <ReactTableFooter
-            data={initialState.customers}
+            data={data}
             tableInstance={tableInstance}
             headers={headers}
           />

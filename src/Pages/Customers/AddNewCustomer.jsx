@@ -67,23 +67,11 @@ const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
   const handleAddNewCustomer = (e) => {
     e.preventDefault();
 
-    const {
-      contact_name,
-      company_name,
-      email_address,
-      mobile_no,
-      address,
-      phone_no,
-    } = customer;
+    const { contact_name, company_name, email_address, mobile_no } = customer;
 
-    const bool = [
-      contact_name,
-      company_name,
-      email_address,
-      mobile_no,
-      address,
-      phone_no,
-    ].every(Boolean);
+    const bool = [contact_name, company_name, email_address, mobile_no].every(
+      Boolean
+    );
 
     if (bool) {
       addNewCustomer(e);
@@ -93,8 +81,6 @@ const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
         [!company_name]: "Please input company!",
         [!email_address]: "Please input email!",
         [!mobile_no]: "Please input contact!",
-        [!address]: "Please input address!",
-        [!phone_no]: "Please input landline",
       };
 
       const errorMessage = conditions[true];
@@ -164,23 +150,21 @@ const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
             />
           </div>
           <div className="group">
-            <label htmlFor="phone_no">Landline</label>
+            <label htmlFor="phone_no">Landline (optional)</label>
             <input
               type="tel"
               id="phone_no"
               value={customer.phone_no}
               onChange={(e) => handleChange(e)}
-              required
             />
           </div>
           <div className="group">
-            <label htmlFor="address">Address</label>
+            <label htmlFor="address">Address (optional)</label>
             <input
               type="text"
               id="address"
               value={customer.address}
               onChange={(e) => handleChange(e)}
-              required
             />
           </div>
 
