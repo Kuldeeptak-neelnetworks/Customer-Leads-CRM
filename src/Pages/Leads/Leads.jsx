@@ -13,7 +13,7 @@ import {
   usePagination,
 } from "react-table";
 import PageHeader from "../../Templates/PageHeader/PageHeader";
-import { DeleteIconSVG, EditIconSVG } from "../../utils/SVGs/SVGs";
+import { DeleteIconSVG, EditIconSVG, PlusIconSVG } from "../../utils/SVGs/SVGs";
 import ReactTableFooter from "../../Templates/ReactTableFooter/ReactTableFooter";
 import { useNavigate } from "react-router-dom";
 
@@ -105,24 +105,47 @@ const Leads = () => {
       Header: "Actions",
       Cell: ({ row }) => (
         <div className="table-actions-wrapper d-flex justify-content-center align-items-center gap-2">
-          <Tooltip
-            id="edit-lead-tooltip"
-            style={{
-              background: "#000",
-              color: "#fff",
-            }}
-            opacity={0.9}
-          />
-          <div
-            data-tooltip-id="edit-lead-tooltip"
-            data-tooltip-content="Edit Lead Details"
-            data-tooltip-place="top"
-            onClick={() => navigate(`/leads/${row.original?.id}`)}
-          >
-            <EditIconSVG cssClass={"cursor-pointer"} />
-          </div>
-          <span style={{ color: "#00263d38" }}>|</span>
-          <DeleteIconSVG cssClass={"cursor-pointer"} />
+          {userRole === 1 ? (
+            <>
+              <Tooltip
+                id="show-lead-tooltip"
+                style={{
+                  background: "#000",
+                  color: "#fff",
+                }}
+                opacity={0.9}
+              />
+              <div
+                data-tooltip-id="show-lead-tooltip"
+                data-tooltip-content="Check Lead Details"
+                data-tooltip-place="top"
+                onClick={() => navigate(`/leads/${row.original?.id}`)}
+              >
+                <PlusIconSVG cssClass={"cursor-pointer"} />
+              </div>
+            </>
+          ) : (
+            <>
+              <Tooltip
+                id="edit-lead-tooltip"
+                style={{
+                  background: "#000",
+                  color: "#fff",
+                }}
+                opacity={0.9}
+              />
+              <div
+                data-tooltip-id="edit-lead-tooltip"
+                data-tooltip-content="Edit Lead Details"
+                data-tooltip-place="top"
+                onClick={() => navigate(`/leads/${row.original?.id}`)}
+              >
+                <EditIconSVG cssClass={"cursor-pointer"} />
+              </div>
+              <span style={{ color: "#00263d38" }}>|</span>
+              <DeleteIconSVG cssClass={"cursor-pointer"} />
+            </>
+          )}
         </div>
       ),
     },
