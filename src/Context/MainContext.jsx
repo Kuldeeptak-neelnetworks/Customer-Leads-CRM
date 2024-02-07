@@ -60,6 +60,18 @@ export const MainContext = ({ children }) => {
     });
   };
 
+  // getting my customers API
+  const getMyCustomers = () => {
+    const url = `${apiUrl}/my-customers`;
+    getData(url, (result) => {
+      console.log("my customers: ", result);
+      setInitialState((prev) => ({
+        ...prev,
+        myCustomers: result?.data?.customer_list ?? [],
+      }));
+    });
+  };
+
   // --------------------- FOR ALL LEADS ---------------------------------------------------
   // getting all leads API
   const getAllLeads = () => {
@@ -92,6 +104,7 @@ export const MainContext = ({ children }) => {
         setInitialState,
         getAllUsers,
         getAllCustomers,
+        getMyCustomers,
         getAllLeads,
         getMyLeads,
       }}
