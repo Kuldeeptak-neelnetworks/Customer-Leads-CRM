@@ -75,10 +75,14 @@ const Customers = () => {
     {
       Header: "Actions",
       Cell: ({ row }) => (
-        <div className="table-actions-wrapper d-flex justify-content-center align-items-center gap-2">
-          <EditIconSVG cssClass={"cursor-pointer"} />
+        <div className="table-actions-wrapper d-flex justify-content-center align-items-center">
+          <div className="table-actions-icon-wrapper">
+            <EditIconSVG cssClass={"cursor-pointer"} />
+          </div>
           <span style={{ color: "#00263d38" }}>|</span>
-          <DeleteIconSVG cssClass={"cursor-pointer"} />
+          <div className="table-actions-icon-wrapper">
+            <DeleteIconSVG cssClass={"cursor-pointer"} />
+          </div>
         </div>
       ),
     },

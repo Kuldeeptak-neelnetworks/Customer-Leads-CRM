@@ -18,7 +18,8 @@ const ReactTable = ({ tableInstance }) => {
                   <span>
                     <span>{column.render("Header")} </span>
                     <span>
-                      {column.Header === "Actions" ? (
+                      {column.Header === "Actions" ||
+                      column.Header === "Representative" ? (
                         ""
                       ) : column.isSorted ? (
                         column.isSortedDesc ? (

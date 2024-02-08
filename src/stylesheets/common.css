@@ -55,6 +55,7 @@
   border-radius: 0;
   color: #e0fbfc;
   min-height: 33px;
+  padding: 0px 30px;
 }
 .cta-btn span {
   margin-left: 10px;
@@ -63,10 +64,12 @@
 }
 
 .table-actions-wrapper {
-  padding: 6px 10px;
   border: 1px solid var(--primary-border-color);
   width: max-content;
   margin: 0px auto;
+}
+.table-actions-icon-wrapper {
+  padding: 6px 10px;
 }
 
 .react-table thead.react-table_thead {
@@ -185,7 +188,7 @@ span.download-icon-svg-parent-wrapper {
 /* -----------Modal CSS---------------- */
 .modal-content {
   border-radius: 0;
-  background-color: #d3e4cd;
+  /* background-color: #d3e4cd; */
 }
 
 .modal-title {
@@ -210,7 +213,43 @@ span.download-icon-svg-parent-wrapper {
   padding: 30px 0px;
 }
 
-/* .modal-content .modal-body */
+/* ----------------------------------- */
+
+form .group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.group input,
+.group select,
+.group textarea {
+  border: 1px solid #ccc;
+  border-radius: var(--primary-radius);
+  padding: 6px 8px 6px 0px;
+  text-overflow: ellipsis;
+}
+
+form button {
+  padding: 8px 16px;
+  outline: none;
+  border: 0;
+  background-color: var(--primary-green-color);
+  color: white;
+  border-radius: var(--primary-radius);
+  transition: all 0.3s ease;
+}
+
+form button:disabled {
+  cursor: not-allowed;
+}
+
+form .note a {
+  color: var(--primary-green-color);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
 form .group label {
   font-family: var(--jost-font-family);
   font-size: 16px;
@@ -220,12 +259,11 @@ form .group label {
   padding-bottom: 4px;
 }
 
-/* .modal-content .modal-body */
-/* .modal-content .modal-body */
 form .group input,
-form .group select {
+form .group select,
+form .group textarea {
   border: 0;
-  border-bottom: 2px solid #519538;
+  border-bottom: 1px solid var(--primary-green-color);
   border-radius: 0;
   font-family: var(--jost-font-family);
   font-size: 15px;
@@ -235,16 +273,14 @@ form .group select {
   background-color: transparent;
 }
 
-/* .modal-content .modal-body */
-/* .modal-content .modal-body */
 form .group input:focus,
-form .group select:focus {
-  outline: 2px solid #519538;
-  border-radius: var(--primary-radius);
+form .group select:focus,
+form .group textarea:focus {
   border: 0;
+  outline: none;
+  border-bottom: 2px solid var(--primary-green-color);
 }
 
-/* .modal-content .modal-body */
 form button {
   margin: 20px 0px 0px 0px;
 }
@@ -298,7 +334,6 @@ form .group input:disabled {
 /* ------------------- */
 .dashboard-block {
   padding: 25px 50px 0px 50px;
-  /* border: 1px solid var(--primary-green-color); */
   box-sizing: border-box;
   max-width: 400px;
   text-align: center;

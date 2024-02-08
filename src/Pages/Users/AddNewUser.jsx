@@ -40,7 +40,7 @@ const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
       formData.append("userRoles", user.userRoles);
       formData.append("contact_no", user.contact_no);
       formData.append("address", user.address);
-      formData.append("profile_pic", user.profilePic);
+      formData.append("profile_pic", user.profilePic ? user.profilePic : "");
 
       const url = `${apiUrl}/add/user`;
       const result = await axios.post(url, formData, {
@@ -63,7 +63,6 @@ const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
         });
       }
     } catch (e) {
-      // ReactHotToast(e.response.data.message, "error");
       Object.values(e.response.data.error).forEach((error) =>
         ReactHotToast(error, "error")
       );
@@ -177,14 +176,14 @@ const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
             >
               <option>Select User Role</option>
               <option value="1">Admin</option>
-              <option value="2">Employee</option>
+              {/* <option value="2">Employee</option> */}
               <option value="3">SalesPerson</option>
             </select>
           </div>
           <div className="group">
             <label htmlFor="contact_no">Contact</label>
             <input
-              type="tel"
+              type="number"
               id="contact_no"
               value={user.contact_no}
               onChange={(e) => handleChange(e)}
@@ -193,11 +192,12 @@ const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
           </div>
           <div className="group">
             <label htmlFor="address">Address</label>
-            <input
+            <textarea
               type="text"
               id="address"
               value={user.address}
               onChange={(e) => handleChange(e)}
+              rows={3}
               required
             />
           </div>
