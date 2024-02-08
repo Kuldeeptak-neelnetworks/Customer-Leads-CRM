@@ -132,7 +132,7 @@ const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
           <div className="group">
             <label htmlFor="email_address">Email</label>
             <input
-              type="text"
+              type="email"
               id="email_address"
               value={customer.email_address}
               onChange={(e) => handleChange(e)}
@@ -142,7 +142,7 @@ const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
           <div className="group">
             <label htmlFor="mobile_no">Mobile</label>
             <input
-              type="tel"
+              type="number"
               id="mobile_no"
               value={customer.mobile_no}
               onChange={(e) => handleChange(e)}
@@ -152,7 +152,7 @@ const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
           <div className="group">
             <label htmlFor="phone_no">Landline (optional)</label>
             <input
-              type="tel"
+              type="number"
               id="phone_no"
               value={customer.phone_no}
               onChange={(e) => handleChange(e)}
@@ -160,11 +160,12 @@ const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
           </div>
           <div className="group">
             <label htmlFor="address">Address (optional)</label>
-            <input
+            <textarea
               type="text"
               id="address"
               value={customer.address}
               onChange={(e) => handleChange(e)}
+              rows={3}
             />
           </div>
 
@@ -182,7 +183,7 @@ export const AddNewCustomer = ({ setIsUpdated }) => {
 
   return (
     <>
-      <button onClick={() => setModalShow(true)} className="cta-btn w-50">
+      <button onClick={() => setModalShow(true)} className="cta-btn">
         Add New Customer
         <span>
           <PlusIconSVG />

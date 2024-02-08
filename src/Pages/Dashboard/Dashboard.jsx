@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import { ContextMain } from "../../Context/MainContext";
 import { useNavigate } from "react-router-dom";
 
@@ -6,6 +6,7 @@ const Dashboard = () => {
   const {
     initialState,
     getAllLeads,
+    getMyCustomers,
     getAllCustomers,
     getMyLeads,
     getAllUsers,
@@ -17,15 +18,29 @@ const Dashboard = () => {
     if (userRole === 1) {
       getAllLeads();
       getAllUsers();
+      getAllCustomers();
     } else {
       getMyLeads();
+      getMyCustomers();
     }
-
-    getAllCustomers();
   }, []);
 
-  const blockData = (data) => [...data].reverse();
+  const blockData = (data) => [...data].reverse().slice(0, 5);
+  const leadsFound = useMemo(
+    () =>
+      userRole === 1
+        ? initialState?.leads?.length > 0
+        : initialState?.myLeads?.length > 0,
+    [initialState.leads, initialState.myLeads, userRole]
+  );
 
+  const customersFound = useMemo(
+    () =>
+      userRole === 1
+        ? initialState?.customers?.length > 0
+        : initialState?.myCustomers?.length > 0,
+    [initialState.customers, initialState.myCustomers, userRole]
+  );
   return (
     <div className="main-wrapper">
       <div className="d-flex justify-content-between align-items-center">
@@ -36,11 +51,9 @@ const Dashboard = () => {
         {/* New Leads */}
         <div className="dashboard-block">
           <h4>Latest Leads</h4>
-          {(
-            userRole === 1
-              ? initialState?.leads?.length > 0
-              : initialState?.myLeads?.length > 0
-          ) ? (
+          {initialState.isLoading ? (
+            <p className="m-0">Loading Leads!</p>
+          ) : leadsFound ? (
             <ul className="block-data-wrapper mt-5">
               {blockData(
                 userRole === 1 ? initialState?.leads : initialState?.myLeads
@@ -67,9 +80,15 @@ const Dashboard = () => {
           className={`dashboard-block before ${userRole === 1 ? "after" : ""}`}
         >
           <h4>New Customers</h4>
-          {initialState?.customers?.length > 0 ? (
+          {initialState.isLoading ? (
+            <p className="m-0">Loading Customers!</p>
+          ) : customersFound ? (
             <ul className="block-data-wrapper mt-5">
-              {blockData(initialState?.customers)?.map((customer) => (
+              {blockData(
+                userRole === 1
+                  ? initialState?.customers
+                  : initialState?.myCustomers
+              )?.map((customer) => (
                 <li key={customer.id}>
                   <p>
                     <span>Name:</span> {customer.contact_name}
@@ -88,7 +107,9 @@ const Dashboard = () => {
         {userRole === 1 && (
           <div className="dashboard-block">
             <h4>New Salespersons</h4>
-            {initialState?.users?.length > 0 ? (
+            {initialState.isLoading ? (
+              <p className="m-0">Loading Users!</p>
+            ) : initialState?.users?.length > 0 ? (
               <ul className="block-data-wrapper mt-5">
                 {blockData(initialState?.users)
                   ?.filter(({ userRoles }) => userRoles === "SalesPerson")

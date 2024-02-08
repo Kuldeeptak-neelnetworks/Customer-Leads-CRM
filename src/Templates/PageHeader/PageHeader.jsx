@@ -6,8 +6,8 @@ const PageHeader = ({ heading, tableInstance, children }) => {
   return (
     <div className="d-flex justify-content-between align-items-center">
       <h2 className="page-heading">{heading}</h2>
-      <div className="d-flex justify-content-end align-items-center gap-4 w-35">
-        <div className="position-relative w-50">
+      <div className="d-flex justify-content-end align-items-center gap-4">
+        <div className="position-relative">
           <img className="search-icon" src={searchIcon} alt="search-icon" />
           <input
             className="input-field w-100"

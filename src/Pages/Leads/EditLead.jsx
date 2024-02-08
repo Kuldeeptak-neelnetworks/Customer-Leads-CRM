@@ -19,7 +19,7 @@ const EditLead = () => {
     contact: "",
     url: "",
     notes: "",
-    status: "",
+    status: false,
     customerId: "",
   });
   const userRole = +JSON.parse(localStorage.getItem("user")).userRoles;
@@ -135,27 +135,6 @@ const EditLead = () => {
             readOnly
           />
         </div>
-        <div className="group d-flex flex-row gap-3 justify-content-start align-items-center">
-          <label htmlFor="status" className="py-0">
-            Confirmed Customer Status
-          </label>
-          <input
-            type="checkbox"
-            id="status"
-            // value={lead.status}
-            onChange={(e) => {
-              if (userRole !== 1) {
-                setLead((prev) => ({
-                  ...prev,
-                  status: !prev.status,
-                }));
-              }
-            }}
-            checked={lead.status}
-            readOnly={userRole === 1}
-            style={{ cursor: `${userRole === 1 ? "not-allowed" : "pointer"}` }}
-          />
-        </div>
         <div className="group">
           <label htmlFor="url">URL</label>
           <input
@@ -186,6 +165,26 @@ const EditLead = () => {
             }
             disabled={userRole === 1}
             readOnly={userRole === 1}
+          />
+        </div>
+        <div className="group d-flex flex-row gap-2 mt-1 justify-content-start align-items-center">
+          <label htmlFor="status" className="py-0">
+            Confirmed Customer Status
+          </label>
+          <input
+            type="checkbox"
+            id="status"
+            onChange={(e) => {
+              if (userRole !== 1) {
+                setLead((prev) => ({
+                  ...prev,
+                  status: !prev.status,
+                }));
+              }
+            }}
+            checked={lead.status}
+            readOnly={userRole === 1}
+            style={{ cursor: `${userRole === 1 ? "not-allowed" : "pointer"}` }}
           />
         </div>
 

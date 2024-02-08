@@ -92,25 +92,24 @@ const Leads = () => {
       accessor: "company_name",
     },
     {
-      Header: "Rep Name",
-      accessor: "rep_name",
-    },
-    {
-      Header: "Rep Pic",
+      Header: "Representative",
       Cell: ({ row }) => {
         const profilePic = row.original?.rep_pic;
         const imgUrl = profilePic
           ? `https://crm.neelnetworks.org/${profilePic}`
           : "https://neelnetworks.org/dummy.jpg";
         return (
-          <img src={imgUrl} alt="profile-image" className="profile-image" />
+          <>
+            <img src={imgUrl} alt="profile-image" className="profile-image" />
+            <span className="mx-4">{row.original.rep_name}</span>
+          </>
         );
       },
     },
     {
       Header: "Actions",
       Cell: ({ row }) => (
-        <div className="table-actions-wrapper d-flex justify-content-center align-items-center gap-2">
+        <div className="table-actions-wrapper d-flex justify-content-center align-items-center">
           {userRole === 1 ? (
             <>
               <Tooltip
@@ -126,8 +125,9 @@ const Leads = () => {
                 data-tooltip-content="Check Lead Details"
                 data-tooltip-place="top"
                 onClick={() => navigate(`/leads/${row.original?.id}`)}
+                className="cursor-pointer table-actions-icon-wrapper"
               >
-                <PlusIconSVG cssClass={"cursor-pointer"} />
+                <PlusIconSVG />
               </div>
             </>
           ) : (
@@ -145,11 +145,14 @@ const Leads = () => {
                 data-tooltip-content="Edit Lead Details"
                 data-tooltip-place="top"
                 onClick={() => navigate(`/leads/${row.original?.id}`)}
+                className="cursor-pointer table-actions-icon-wrapper"
               >
-                <EditIconSVG cssClass={"cursor-pointer"} />
+                <EditIconSVG />
               </div>
               <span style={{ color: "#00263d38" }}>|</span>
-              <DeleteIconSVG cssClass={"cursor-pointer"} />
+              <div className="table-actions-icon-wrapper">
+                <DeleteIconSVG />
+              </div>
             </>
           )}
         </div>
