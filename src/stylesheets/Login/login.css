@@ -82,7 +82,7 @@
 
 .login-form .group input {
   border: 0;
-  border-bottom: 2px solid #519538;
+  border-bottom: 1px solid #519538;
   border-radius: 0;
   font-family: var(--jost-font-family);
   font-size: 22px;
@@ -93,9 +93,14 @@
 }
 
 .login-form .group input:focus {
-  outline: 2px solid #519538;
-  border-radius: var(--primary-radius);
   border: 0;
+  outline: none;
+  border-bottom: 2px solid var(--primary-green-color);
+}
+
+.login-form .group input:-webkit-autofill,
+.login-form .group input:-webkit-autofill:focus {
+  transition: background-color 0s 600000s, color 0s 600000s !important;
 }
 
 .login-form .link {

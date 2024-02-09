@@ -29,6 +29,7 @@ import Sidebar from "./Components/Sidebar/Sidebar";
 
 // private routes template
 import TokenAuth from "./utils/PrivateRoutes/TokenAuth";
+import AdminRoutes from "./utils/PrivateRoutes/AdminRoutes";
 
 const HeaderAndSiderbar = () => {
   return (
@@ -85,15 +86,6 @@ function App() {
             }
           />
           <Route
-            path="/users"
-            element={
-              <>
-                <HeaderAndSiderbar />
-                <Users />
-              </>
-            }
-          />
-          <Route
             path="/profile"
             element={
               <>
@@ -102,6 +94,17 @@ function App() {
               </>
             }
           />
+          <Route element={<AdminRoutes />}>
+            <Route
+              path="/users"
+              element={
+                <>
+                  <HeaderAndSiderbar />
+                  <Users />
+                </>
+              }
+            />
+          </Route>
         </Route>
       </Routes>
       <Toaster />

@@ -26,6 +26,7 @@ const Dashboard = () => {
   }, []);
 
   const blockData = (data) => [...data].reverse().slice(0, 5);
+
   const leadsFound = useMemo(
     () =>
       userRole === 1
@@ -90,7 +91,10 @@ const Dashboard = () => {
                   : initialState?.myCustomers
               )?.map((customer) => (
                 <li key={customer.id}>
-                  <p>
+                  <p
+                    onClick={() => navigate(`/customers`)}
+                    style={{ textDecoration: "underline", cursor: "pointer" }}
+                  >
                     <span>Name:</span> {customer.contact_name}
                   </p>
                   <p>
@@ -108,24 +112,32 @@ const Dashboard = () => {
           <div className="dashboard-block">
             <h4>New Salespersons</h4>
             {initialState.isLoading ? (
-              <p className="m-0">Loading Users!</p>
+              <p className="m-0">Loading Salespersons!</p>
             ) : initialState?.users?.length > 0 ? (
               <ul className="block-data-wrapper mt-5">
-                {blockData(initialState?.users)
-                  ?.filter(({ userRoles }) => userRoles === "SalesPerson")
-                  ?.map((user) => (
-                    <li key={user.id}>
-                      <p>
-                        <span>Name:</span> {user.name}
-                      </p>
-                      <p>
-                        <span>Email Id:</span> {user.email}
-                      </p>
-                    </li>
-                  ))}
+                {blockData(
+                  initialState?.users.filter(
+                    ({ userRoles }) => userRoles === "SalesPerson"
+                  )
+                )?.map((user) => (
+                  <li key={user.id}>
+                    <p
+                      onClick={() => navigate(`/users`)}
+                      style={{
+                        textDecoration: "underline",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <span>Name:</span> {user.name}
+                    </p>
+                    <p>
+                      <span>Email Id:</span> {user.email}
+                    </p>
+                  </li>
+                ))}
               </ul>
             ) : (
-              <p className="m-0">No Users Found!</p>
+              <p className="m-0">No Salesperson Found!</p>
             )}
           </div>
         )}
