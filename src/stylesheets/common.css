@@ -388,11 +388,6 @@ ul.block-data-wrapper li {
   list-style: none;
 }
 
-/* ul.block-data-wrapper li::marker {
-  font-size: 18px;
-  color: var(--primary-green-color);
-} */
-
 ul.block-data-wrapper li p {
   margin-bottom: 5px;
   font-family: var(--roboto-font-family);
@@ -406,4 +401,16 @@ ul.block-data-wrapper li p {
 
 ul.block-data-wrapper li p span {
   font-weight: 500;
+}
+
+/* ----------------------------------------- */
+.previousPageSVGIcon.not-allow,
+.nextPageSVGIcon.not-allow {
+  color: var(--blue-font-color);
+  opacity: 0.4;
+}
+.previousPageSVGIcon.allow,
+.nextPageSVGIcon.allow {
+  color: var(--blue-font-color);
+  opacity: 1;
 }

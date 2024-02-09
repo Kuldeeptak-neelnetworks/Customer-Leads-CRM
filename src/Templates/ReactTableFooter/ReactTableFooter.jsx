@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { CSVLink } from "react-csv";
 import PageSizePopover from "../PageSizePopover/PageSizePopover";
 import { DownloadIconSVG } from "../../utils/SVGs/SVGs";
@@ -11,16 +12,21 @@ const ReactTableFooter = ({ data, headers, tableInstance }) => {
   return (
     <div className="react-table_tfoot d-flex justify-content-between align-items-center px-4">
       <div className="d-flex justfy-content-center align-items-center gap-2">
-        <span className="cursor-pointer" onClick={() => previousPage()}>
+        <span
+          className={`${pageIndex !== 0 && "cursor-pointer"}`}
+          onClick={() => previousPage()}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="18"
             height="18"
             viewBox="-4 0 12 12"
             fill="none"
+            className={`previousPageSVGIcon ${
+              pageIndex !== 0 ? "allow" : "not-allow"
+            }`}
           >
             <path
-              opacity="0.5"
               d="M5.3718 0.989075L1.17334 5.18761L5.3718 9.38606"
               stroke="currentColor"
               strokeWidth="1.5"
@@ -43,16 +49,23 @@ const ReactTableFooter = ({ data, headers, tableInstance }) => {
         </span>
         <span className="">/</span>
         <span className="">{isGreaterThan10(pageOptions.length)}</span>
-        <span className="cursor-pointer" onClick={() => nextPage()}>
+        <span
+          className={`${
+            pageIndex + 1 !== pageOptions?.length && "cursor-pointer"
+          }`}
+          onClick={() => nextPage()}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
             height="16"
             viewBox="0 0 12 12"
             fill="none"
+            className={`nextPageSVGIcon ${
+              pageIndex + 1 === pageOptions?.length ? "not-allow" : "allow"
+            }`}
           >
             <path
-              opacity="0.95"
               d="M1.25174 9.38605L5.4502 5.18752L1.25174 0.989059"
               stroke="currentColor"
               strokeWidth="1.5"
