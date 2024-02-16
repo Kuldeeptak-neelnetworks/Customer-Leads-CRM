@@ -9,6 +9,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import Leads from "./Pages/Leads/Leads";
 import EditLead from "./Pages/Leads/EditLead";
 import Customers from "./Pages/Customers/Customers";
+import CustomerDetails from "./Pages/Customers/CustomerDetails";
 import Users from "./Pages/Users/Users";
 import Profile from "./Pages/Profile/Profile";
 import NoPage from "./Pages/NoPage/NoPage";
@@ -82,6 +83,15 @@ function App() {
               <>
                 <HeaderAndSiderbar />
                 <Customers />
+              </>
+            }
+          />
+          <Route
+            path="/customers/:customerId"
+            element={
+              <>
+                <HeaderAndSiderbar />
+                <CustomerDetails />
               </>
             }
           />

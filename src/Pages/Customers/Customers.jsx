@@ -1,5 +1,7 @@
 import { useContext, useEffect, useMemo, useState } from "react";
 import { ContextMain } from "../../Context/MainContext";
+import { Tooltip } from "react-tooltip";
+import { useNavigate } from "react-router-dom";
 
 import ReactSkeletonTable from "../../Templates/ReactSkeletonTable/ReactSkeletonTable";
 import ReactTable from "../../Templates/ReactTable/ReactTable";
@@ -12,10 +14,11 @@ import {
   usePagination,
 } from "react-table";
 import PageHeader from "../../Templates/PageHeader/PageHeader";
-import { DeleteIconSVG, EditIconSVG } from "../../utils/SVGs/SVGs";
+import { DeleteIconSVG, EditIconSVG, PlusIconSVG } from "../../utils/SVGs/SVGs";
 import ReactTableFooter from "../../Templates/ReactTableFooter/ReactTableFooter";
 
 const Customers = () => {
+  const navigate = useNavigate();
   const { initialState, getAllCustomers, getMyCustomers } =
     useContext(ContextMain);
   const [isUpdated, setIsUpdated] = useState(false);
@@ -76,13 +79,51 @@ const Customers = () => {
       Header: "Actions",
       Cell: ({ row }) => (
         <div className="table-actions-wrapper d-flex justify-content-center align-items-center">
-          <div className="table-actions-icon-wrapper">
-            <EditIconSVG cssClass={"cursor-pointer"} />
-          </div>
-          <span style={{ color: "#00263d38" }}>|</span>
-          <div className="table-actions-icon-wrapper">
-            <DeleteIconSVG cssClass={"cursor-pointer"} />
-          </div>
+          {userRole === 1 ? (
+            <>
+              <Tooltip
+                id="show-customer-tooltip"
+                style={{
+                  background: "#000",
+                  color: "#fff",
+                }}
+                opacity={0.9}
+              />
+              <div
+                data-tooltip-id="show-customer-tooltip"
+                data-tooltip-content="Check Customer Details"
+                data-tooltip-place="top"
+                onClick={() => navigate(`/customers/${row.original?.id}`)}
+                className="cursor-pointer table-actions-icon-wrapper"
+              >
+                <PlusIconSVG />
+              </div>
+            </>
+          ) : (
+            <>
+              <Tooltip
+                id="edit-customer-tooltip"
+                style={{
+                  background: "#000",
+                  color: "#fff",
+                }}
+                opacity={0.9}
+              />
+              <div
+                data-tooltip-id="edit-customer-tooltip"
+                data-tooltip-content="Edit Customer Details"
+                data-tooltip-place="top"
+                onClick={() => navigate(`/customers/${row.original?.id}`)}
+                className="cursor-pointer table-actions-icon-wrapper"
+              >
+                <EditIconSVG />
+              </div>
+              <span style={{ color: "#00263d38" }}>|</span>
+              <div className="table-actions-icon-wrapper">
+                <DeleteIconSVG />
+              </div>
+            </>
+          )}
         </div>
       ),
     },
