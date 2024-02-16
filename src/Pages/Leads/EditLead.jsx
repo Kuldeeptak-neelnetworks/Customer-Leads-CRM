@@ -79,8 +79,6 @@ const EditLead = () => {
         headers: headerOptions(true),
       });
 
-      console.log("result lead updated: ", result);
-
       if (result.status === 200) {
         ReactHotToast(result.data.message, "success");
       }

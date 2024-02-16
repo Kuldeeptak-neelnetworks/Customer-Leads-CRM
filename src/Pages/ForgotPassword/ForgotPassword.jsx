@@ -1,10 +1,7 @@
 import { useState } from "react";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { SpinningLoader } from "../../Templates/SpinningLoader/SpinningLoader";
 
-import ReactHotToast from "../../utils/ReactHotToast/ReactHotToast";
-import { apiUrl } from "../../utils/Constants/constants";
 import logo from "../../assets/logo.png";
 import avatar from "../../assets/avatar.png";
 
@@ -14,9 +11,6 @@ const ForgotPassword = () => {
   // if token is available then redirecting user to dashboard page
   if (localStorage.getItem("token")) navigate("/dashboard");
 
-  const [user, setUser] = useState({
-    email: "hem@gmail.com",
-  });
   const [isDisabled, setIsDisabled] = useState(false);
 
   return (

@@ -28,14 +28,16 @@
   outline: 0;
 }
 
-.page-heading {
+h2.page-heading,
+h4.page-heading {
   font-family: var(--roboto-font-family);
   font-size: 32px;
   font-weight: 700;
   line-height: 1;
   width: max-content;
 }
-.page-heading::after {
+h2.page-heading::after,
+h4.page-heading::after {
   content: "";
   display: block;
   height: 3px;
@@ -43,6 +45,9 @@
   border-radius: 10px;
   margin-top: 8px;
   width: 100%;
+}
+h4.page-heading {
+  font-size: 20px;
 }
 
 .cta-btn {
@@ -413,4 +418,26 @@ ul.block-data-wrapper li p span {
 .nextPageSVGIcon.allow {
   color: var(--blue-font-color);
   opacity: 1;
+}
+
+/* ------------------------------- */
+
+.customer-attachments .attachment {
+  display: flex;
+  gap: 15px;
+  justify-content: start;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.customer-attachments .attachment p {
+  margin: 0;
+  font-family: var(--roboto-font-family);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.5px;
+  color: var(--blue-font-color);
+  width: clamp(20%, 20%, 50%);
+  word-wrap: break-word;
 }
