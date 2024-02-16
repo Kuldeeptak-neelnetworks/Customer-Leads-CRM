@@ -425,9 +425,11 @@ ul.block-data-wrapper li p span {
 .customer-attachments .attachment {
   display: flex;
   gap: 15px;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
+  border-bottom: 1px solid var(--primary-green-color);
+  padding-bottom: 14px;
 }
 
 .customer-attachments .attachment p {
@@ -438,6 +440,5 @@ ul.block-data-wrapper li p span {
   line-height: 1;
   letter-spacing: 0.5px;
   color: var(--blue-font-color);
-  width: clamp(20%, 20%, 50%);
   word-wrap: break-word;
 }
