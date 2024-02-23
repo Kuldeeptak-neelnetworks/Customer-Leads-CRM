@@ -63,10 +63,11 @@ const Dashboard = () => {
                   <p
                     onClick={() => navigate(`/leads/${lead.id}`)}
                     style={{ textDecoration: "underline", cursor: "pointer" }}
+                    className="content-text"
                   >
                     <span>Name:</span> {lead.contact_name}
                   </p>
-                  <p>
+                  <p className="content-text">
                     <span>Company:</span> {lead.company_name}
                   </p>
                 </li>

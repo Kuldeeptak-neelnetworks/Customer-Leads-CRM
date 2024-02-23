@@ -1,20 +1,49 @@
-import { useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useContext, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { ContextMain } from "../../Context/MainContext";
+import { AddNewAttachment } from "./AddNewAttachment";
+import { clientsEmailCommunication } from "../../utils/Constants/constants";
 
 const CustomerDetails = () => {
+  const navigate = useNavigate();
   const { customerId } = useParams();
   const { initialState, getAllCustomers, getMyCustomers } =
     useContext(ContextMain);
   const userRole = +JSON.parse(localStorage.getItem("user")).userRoles;
+  const [customer, setCustomer] = useState({});
 
+  // calling customers or my-customers api
   useEffect(() => {
     if (userRole === 1) {
       getAllCustomers();
     } else {
       getMyCustomers();
     }
-  }, []);
+  }, [userRole]);
+
+  // filtering customer details & setting it in customer state
+  useEffect(() => {
+    const filterData = (dataset) => {
+      const filteredCustomer = dataset?.find(
+        (customerData) => +customerData.id === +customerId
+      );
+
+      setCustomer({
+        name: filteredCustomer?.contact_name,
+        company: filteredCustomer?.company_name,
+        email: filteredCustomer?.email_address,
+        mobile: filteredCustomer?.mobile_no,
+        landline: filteredCustomer?.phone_no,
+        address: filteredCustomer?.address,
+      });
+    };
+
+    if (userRole === 1) {
+      filterData(initialState.customers);
+    } else {
+      filterData(initialState.myCustomers);
+    }
+  }, [initialState.customers, initialState.myCustomers, userRole, customerId]);
 
   return (
     <div className="main-wrapper">
@@ -34,6 +63,7 @@ const CustomerDetails = () => {
               id="name"
               disabled={userRole === 1}
               readOnly={userRole === 1}
+              value={customer?.name}
             />
           </div>
           <div className="group">
@@ -43,6 +73,7 @@ const CustomerDetails = () => {
               id="company"
               disabled={userRole === 1}
               readOnly={userRole === 1}
+              value={customer?.company}
             />
           </div>
           <div className="group">
@@ -52,15 +83,17 @@ const CustomerDetails = () => {
               id="email"
               disabled={userRole === 1}
               readOnly={userRole === 1}
+              value={customer?.email}
             />
           </div>
           <div className="group">
-            <label htmlFor="contact">Mobile</label>
+            <label htmlFor="mobile">Mobile</label>
             <input
               type="number"
-              id="contact"
+              id="mobile"
               disabled={userRole === 1}
               readOnly={userRole === 1}
+              value={customer?.mobile}
             />
           </div>
           <div className="group">
@@ -70,6 +103,7 @@ const CustomerDetails = () => {
               id="landline"
               disabled={userRole === 1}
               readOnly={userRole === 1}
+              value={customer?.landline}
             />
           </div>
           <div className="group">
@@ -80,6 +114,7 @@ const CustomerDetails = () => {
               rows={3}
               disabled={userRole === 1}
               readOnly={userRole === 1}
+              value={customer?.address}
             />
           </div>
 
@@ -91,7 +126,10 @@ const CustomerDetails = () => {
           )}
         </form>
         <div className="customer-attachments w-75">
-          <h4 className="page-heading mb-3">Attachments (2)</h4>
+          <div className="d-flex justify-content-between align-item-center mb-5">
+            <h4 className="page-heading m-0">Attachments (2)</h4>
+            <AddNewAttachment />
+          </div>
           <div className="attachment">
             <p>Client-101-Invoice.pdf</p>
             <button className="cta-btn">Download</button>
@@ -103,7 +141,34 @@ const CustomerDetails = () => {
         </div>
       </section>
       {/* email section */}
-      <section></section>
+      <section>
+        <h4 className="page-heading mt-5">Email Communications</h4>
+        <div className="d-flex gap-2 mt-4">
+          <div className="email-communication-list-wrapper w-100">
+            {clientsEmailCommunication.list.map((email) => (
+              <div
+                className="communication d-flex align-items-center justify-content-between gap-3"
+                key={email.id}
+                onClick={() =>
+                  navigate(`/customers/${customerId}/emails/${email.id}`, {
+                    state: {
+                      email,
+                      customer,
+                    },
+                  })
+                }
+              >
+                <p className="m-0 content-text">{customer.name}</p>
+                <p className="m-0 content-text">{email.subject}</p>
+                <p className="m-0 content-text">
+                  {email.time}, {email.date}
+                </p>
+              </div>
+            ))}
+          </div>
+          <div></div>
+        </div>
+      </section>
     </div>
   );
 };

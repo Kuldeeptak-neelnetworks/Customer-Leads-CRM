@@ -12,3 +12,17 @@
 .flex-1 {
   flex: 1;
 }
+
+.content-text {
+  font-family: var(--roboto-font-family);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.5px;
+  color: var(--blue-font-color);
+}
+
+.content-text.username,
+.content-text .subject-title {
+  font-weight: 500;
+}

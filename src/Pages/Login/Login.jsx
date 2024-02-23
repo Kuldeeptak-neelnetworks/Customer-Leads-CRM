@@ -37,7 +37,6 @@ const Login = () => {
       const url = `${apiUrl}/login`;
       const result = await axios.post(url, user);
 
-      console.log("result: ", result);
       if (result.status === 200) {
         localStorage.setItem(
           "token",
