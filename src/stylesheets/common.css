@@ -193,7 +193,6 @@ span.download-icon-svg-parent-wrapper {
 /* -----------Modal CSS---------------- */
 .modal-content {
   border-radius: 0;
-  /* background-color: #d3e4cd; */
 }
 
 .modal-title {
@@ -395,12 +394,6 @@ ul.block-data-wrapper li {
 
 ul.block-data-wrapper li p {
   margin-bottom: 5px;
-  font-family: var(--roboto-font-family);
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: 0.5px;
-  color: var(--blue-font-color);
   word-break: break-all;
 }
 
@@ -421,7 +414,6 @@ ul.block-data-wrapper li p span {
 }
 
 /* ------------------------------- */
-
 .customer-attachments .attachment {
   display: flex;
   gap: 15px;
@@ -429,16 +421,63 @@ ul.block-data-wrapper li p span {
   align-items: center;
   margin-bottom: 15px;
   border-bottom: 1px solid var(--primary-green-color);
-  padding-bottom: 14px;
+  padding-bottom: 10px;
 }
 
 .customer-attachments .attachment p {
   margin: 0;
-  font-family: var(--roboto-font-family);
+  font-family: var(--jost-font-family);
   font-size: 15px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1;
   letter-spacing: 0.5px;
   color: var(--blue-font-color);
   word-wrap: break-word;
+}
+
+/* -------------------------------- */
+.email-communication-list-wrapper {
+  border: 1px solid var(--primary-green-color);
+}
+
+.communication {
+  padding: 15px;
+  border-bottom: 1px solid var(--primary-green-color);
+  cursor: pointer;
+}
+.communication:hover {
+  background-color: #e3fdd9;
+}
+
+.communication:last-child {
+  border-bottom: 0;
+}
+
+.communication .username {
+  width: 20%;
+  text-overflow: ellipsis;
+}
+.communication .message {
+  width: 60%;
+  text-overflow: ellipsis;
+}
+.communication .time-date {
+  font-size: 14px;
+  width: 20%;
+  text-align: right;
+}
+
+/* ------------- */
+.email-parent-wrapper {
+  background-color: #f4f4f4;
+  padding: 25px;
+}
+
+.reactQuillEditor {
+  width: 100%;
+  flex: 1;
+}
+
+.ql-toolbar.ql-snow + .ql-container.ql-snow {
+  height: 100px;
 }

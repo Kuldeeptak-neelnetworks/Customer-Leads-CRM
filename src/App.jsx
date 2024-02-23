@@ -10,6 +10,7 @@ import Leads from "./Pages/Leads/Leads";
 import EditLead from "./Pages/Leads/EditLead";
 import Customers from "./Pages/Customers/Customers";
 import CustomerDetails from "./Pages/Customers/CustomerDetails";
+import EmailDetails from "./Pages/Customers/EmailDetails";
 import Users from "./Pages/Users/Users";
 import Profile from "./Pages/Profile/Profile";
 import NoPage from "./Pages/NoPage/NoPage";
@@ -92,6 +93,15 @@ function App() {
               <>
                 <HeaderAndSiderbar />
                 <CustomerDetails />
+              </>
+            }
+          />
+          <Route
+            path="/customers/:customerId/emails/:emailId"
+            element={
+              <>
+                <HeaderAndSiderbar />
+                <EmailDetails />
               </>
             }
           />
