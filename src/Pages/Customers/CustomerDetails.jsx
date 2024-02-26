@@ -11,6 +11,16 @@ const CustomerDetails = () => {
     useContext(ContextMain);
   const userRole = +JSON.parse(localStorage.getItem("user")).userRoles;
   const [customer, setCustomer] = useState({});
+  const [attachments, setAttachments] = useState([
+    {
+      id: 1,
+      name: "Client-101-Invoice.pdf",
+    },
+    {
+      id: 2,
+      name: "Reports.xls",
+    },
+  ]);
 
   // calling customers or my-customers api
   useEffect(() => {
@@ -56,6 +66,7 @@ const CustomerDetails = () => {
           //   onSubmit={handleEditLead}
           className="d-flex flex-column gap-3 justify-content-center align-items-center w-25"
         >
+          {/* name */}
           <div className="group">
             <label htmlFor="name">Name</label>
             <input
@@ -63,9 +74,10 @@ const CustomerDetails = () => {
               id="name"
               disabled={userRole === 1}
               readOnly={userRole === 1}
-              value={customer?.name}
+              value={customer?.name ?? ""}
             />
           </div>
+          {/* company name */}
           <div className="group">
             <label htmlFor="company">Company</label>
             <input
@@ -73,9 +85,10 @@ const CustomerDetails = () => {
               id="company"
               disabled={userRole === 1}
               readOnly={userRole === 1}
-              value={customer?.company}
+              value={customer?.company ?? ""}
             />
           </div>
+          {/* email id */}
           <div className="group">
             <label htmlFor="email">Email</label>
             <input
@@ -83,9 +96,10 @@ const CustomerDetails = () => {
               id="email"
               disabled={userRole === 1}
               readOnly={userRole === 1}
-              value={customer?.email}
+              value={customer?.email ?? ""}
             />
           </div>
+          {/* mobile */}
           <div className="group">
             <label htmlFor="mobile">Mobile</label>
             <input
@@ -93,9 +107,10 @@ const CustomerDetails = () => {
               id="mobile"
               disabled={userRole === 1}
               readOnly={userRole === 1}
-              value={customer?.mobile}
+              value={customer?.mobile ?? ""}
             />
           </div>
+          {/* landline */}
           <div className="group">
             <label htmlFor="landline">Landline</label>
             <input
@@ -103,9 +118,10 @@ const CustomerDetails = () => {
               id="landline"
               disabled={userRole === 1}
               readOnly={userRole === 1}
-              value={customer?.landline}
+              value={customer?.landline ?? ""}
             />
           </div>
+          {/* address */}
           <div className="group">
             <label htmlFor="address">Address (optional)</label>
             <textarea
@@ -114,7 +130,7 @@ const CustomerDetails = () => {
               rows={3}
               disabled={userRole === 1}
               readOnly={userRole === 1}
-              value={customer?.address}
+              value={customer?.address ?? ""}
             />
           </div>
 
@@ -127,17 +143,20 @@ const CustomerDetails = () => {
         </form>
         <div className="customer-attachments w-75">
           <div className="d-flex justify-content-between align-item-center mb-5">
-            <h4 className="page-heading m-0">Attachments (2)</h4>
-            <AddNewAttachment />
+            <h4 className="page-heading m-0">
+              Attachments ({attachments.length})
+            </h4>
+            <AddNewAttachment
+              attachments={attachments}
+              setAttachments={setAttachments}
+            />
           </div>
-          <div className="attachment">
-            <p>Client-101-Invoice.pdf</p>
-            <button className="cta-btn">Download</button>
-          </div>
-          <div className="attachment">
-            <p>Reports.xls</p>
-            <button className="cta-btn">Download</button>
-          </div>
+          {attachments.map((attachment) => (
+            <div key={attachment.id} className="attachment">
+              <p>{attachment.name}</p>
+              <button className="cta-btn">Download</button>
+            </div>
+          ))}
         </div>
       </section>
       {/* email section */}

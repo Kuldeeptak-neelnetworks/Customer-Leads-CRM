@@ -7,11 +7,24 @@ import { apiUrl, headerOptions } from "../../utils/Constants/constants";
 import { SpinningLoader } from "../../Templates/SpinningLoader/SpinningLoader";
 import { PlusIconSVG } from "../../utils/SVGs/SVGs";
 
-const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
+const MyVerticallyCenteredModal = ({
+  show,
+  onHide,
+  setIsUpdated,
+  attachments,
+  setAttachments,
+}) => {
   const [isDisabled, setIsDisabled] = useState(false);
+  const [newAttachment, setNewAttachment] = useState("");
 
   const handleAddNewAttachment = (e) => {
     e.preventDefault();
+    const updatedAttachments = [
+      ...attachments,
+      { id: attachments.length + 1, name: newAttachment },
+    ];
+    setAttachments(updatedAttachments);
+    onHide();
   };
 
   return (
@@ -37,7 +50,10 @@ const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
             <input
               type="file"
               id="attachment"
-              //   accept="image/png, image/jpeg"
+              accept="image/png, image/jpeg, .doc,.docx,application/msword"
+              onChange={(e) => {
+                setNewAttachment(e.target.files[0].name);
+              }}
             />
           </div>
 
@@ -50,7 +66,11 @@ const MyVerticallyCenteredModal = ({ show, onHide, setIsUpdated }) => {
   );
 };
 
-export const AddNewAttachment = ({ setIsUpdated }) => {
+export const AddNewAttachment = ({
+  setIsUpdated,
+  attachments,
+  setAttachments,
+}) => {
   const [modalShow, setModalShow] = useState(false);
 
   return (
@@ -66,6 +86,8 @@ export const AddNewAttachment = ({ setIsUpdated }) => {
         show={modalShow}
         onHide={() => setModalShow(false)}
         setIsUpdated={setIsUpdated}
+        attachments={attachments}
+        setAttachments={setAttachments}
       />
     </>
   );
