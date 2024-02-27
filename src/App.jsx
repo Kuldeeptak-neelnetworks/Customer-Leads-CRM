@@ -43,7 +43,7 @@ const HeaderAndSiderbar = () => {
 };
 
 function App() {
-  console.log("kuldeep testing")
+  console.log("testing")
   return (
     <div>
       <Routes>
